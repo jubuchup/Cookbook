@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recipe Tracker</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #fafaf7;
+    --panel: #ffffff;
+    --border: #e4e0d8;
+    --text: #2b2924;
+    --muted: #75705f;
+    --accent: #b6552c;
+    --accent-soft: #f3e6da;
+    --core: #3f6b4a;
+    --core-bg: #e7f0e9;
+    --trial: #a5762f;
+    --trial-bg: #f6ecd9;
+    --retired: #8a8578;
+    --retired-bg: #ececE6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header {
+    padding: 28px 24px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+  }
+  #status-line {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  #status-line.error { color: #b3261e; }
+
+  .filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .filters select, .filters input[type="search"] {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--panel);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .filters input[type="search"] { flex: 1; min-width: 160px; }
+
+  .recipe-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .recipe-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    transition: border-color 0.15s ease;
+  }
+  .recipe-card:hover { border-color: var(--accent); }
+  .recipe-card .name { font-weight: 600; }
+  .recipe-card .meta { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .recipe-card .macros { font-size: 0.82rem; color: var(--muted); text-align: right; white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .badge.core { color: var(--core); background: var(--core-bg); }
+  .badge.trial { color: var(--trial); background: var(--trial-bg); }
+  .badge.retired { color: var(--retired); background: var(--retired-bg); }
+
+  .empty-state { color: var(--muted); padding: 24px 4px; text-align: center; }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  .detail-header { margin-bottom: 6px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .detail-header h2 { margin: 0; font-size: 1.35rem; }
+  .detail-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
+
+  .macro-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .macro-box {
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+  }
+  .macro-box .value { font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+  .macro-box .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
+
+  section.block { margin-bottom: 22px; }
+  section.block h3 { font-size: 0.95rem; margin: 0 0 8px; color: var(--text); }
+
+  table.ingredients { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  table.ingredients th, table.ingredients td {
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  table.ingredients th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+  table.ingredients td.num, table.ingredients th.num { text-align: right; }
+
+  ol.steps { padding-left: 22px; margin: 0; }
+  ol.steps li { margin-bottom: 6px; }
+
+  .notes-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 480px) {
+    .macro-row { grid-template-columns: repeat(2, 1fr); }
+    .recipe-card { flex-direction: column; align-items: flex-start; }
+    .recipe-card .macros { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Recipe Tracker</h1>
+  <p>Synced from Google Sheets &rarr; DuckDB, queried live in your browser.</p>
+</header>
+
+<main>
+  <div id="status-line">Loading database&hellip;</div>
+  <div id="app"></div>
+</main>
+
+<script type="module">
+import * as duckdb from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm";
+
+const statusEl = document.getElementById("status-line");
+const appEl = document.getElementById("app");
+
+let conn = null; // duckdb-wasm connection, set once the DB has loaded
+
+/**
+ * Locate the tracker.duckdb file relative to this page.
+ * - On GitHub Pages, deploy.yml copies data/tracker.duckdb into site/data/
+ *   before publishing, so "data/tracker.duckdb" resolves correctly there.
+ * - When opening site/index.html directly from a local checkout (e.g. via
+ *   `python -m http.server` from the repo root), the file instead lives at
+ *   "../data/tracker.duckdb". We try the Pages-relative path first and fall
+ *   back to the repo-relative path so the same file works in both setups.
+ */
+const DB_CANDIDATE_PATHS = ["data/tracker.duckdb", "../data/tracker.duckdb"];
+
+async function fetchFirstAvailable(paths) {
+  for (const path of paths) {
+    try {
+      const res = await fetch(path);
+      if (res.ok) return await res.arrayBuffer();
+    } catch (_) {
+      // try next candidate
+    }
+  }
+  throw new Error(
+    "Could not find tracker.duckdb at any expected path (" + paths.join(", ") + ")"
+  );
+}
+
+async function initDatabase() {
+  const bundles = duckdb.getJsDelivrBundles();
+  const bundle = await duckdb.selectBundle(bundles);
+
+  const workerUrl = URL.createObjectURL(
+    new Blob([`importScripts("${bundle.mainWorker}");`], { type: "text/javascript" })
+  );
+  const worker = new Worker(workerUrl);
+  const logger = new duckdb.ConsoleLogger();
+  const db = new duckdb.AsyncDuckDB(logger, worker);
+  await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+  URL.revokeObjectURL(workerUrl);
+
+  const buffer = await fetchFirstAvailable(DB_CANDIDATE_PATHS);
+  await db.registerFileBuffer("tracker.duckdb", new Uint8Array(buffer));
+
+  const connection = await db.connect();
+  // Attach the pre-built file as a read-only catalog rather than loading it
+  // as the default in-memory DB, since ATTACH is the documented way
+  // duckdb-wasm opens an existing on-disk .duckdb file.
+  await connection.query(`ATTACH 'tracker.duckdb' AS tracker (READ_ONLY)`);
+  await connection.query(`USE tracker`);
+
+  return connection;
+}
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function macroBox(value, label) {
+  const v = value === null || value === undefined ? "—" : Math.round(value);
+  return `<div class="macro-box"><div class="value">${v}</div><div class="label">${label}</div></div>`;
+}
+
+// ---------- List view ----------
+
+let allRecipes = [];   // cached rows: recipe_id, name, category, status, total_kcal, total_protein, total_carbs, total_fat
+let currentStatus = "all";
+let currentCategory = "all";
+let currentSearch = "";
+
+async function loadRecipeList() {
+  const result = await conn.query(`
+    SELECT
+      r.recipe_id, r.name, r.category, r.status,
+      COALESCE(t.total_kcal, r.sheet_total_kcal)       AS total_kcal,
+      COALESCE(t.total_protein, r.sheet_total_protein) AS total_protein,
+      COALESCE(t.total_carbs, r.sheet_total_carbs)      AS total_carbs,
+      COALESCE(t.total_fat, r.sheet_total_fat)          AS total_fat
+    FROM recipes r
+    LEFT JOIN recipe_totals t USING (recipe_id)
+    ORDER BY
+      CASE r.status WHEN 'core' THEN 0 WHEN 'trial' THEN 1 ELSE 2 END,
+      r.name
+  `);
+  allRecipes = result.toArray().map((row) => row.toJSON());
+}
+
+function populateCategoryOptions() {
+  const select = document.getElementById("category-filter");
+  if (!select) return;
+  const categories = Array.from(
+    new Set(allRecipes.map((r) => r.category).filter(Boolean))
+  ).sort();
+  const current = select.value;
+  select.innerHTML =
+    `<option value="all">All categories</option>` +
+    categories.map((c) => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+  if (categories.includes(current)) select.value = current;
+}
+
+function filteredRecipes() {
+  const search = currentSearch.trim().toLowerCase();
+  return allRecipes.filter((r) => {
+    if (currentStatus !== "all" && r.status !== currentStatus) return false;
+    if (currentCategory !== "all" && r.category !== currentCategory) return false;
+    if (search && !(r.name || "").toLowerCase().includes(search)) return false;
+    return true;
+  });
+}
+
+function renderListView() {
+  const rows = filteredRecipes();
+
+  const listHtml = rows.length
+    ? `<ul class="recipe-list">` +
+      rows
+        .map(
+          (r) => `
+        <li class="recipe-card" data-recipe-id="${escapeHtml(r.recipe_id)}">
+          <div>
+            <div class="name">${escapeHtml(r.name)} <span class="badge ${escapeHtml(r.status || "")}">${escapeHtml(r.status || "")}</span></div>
+            <div class="meta">${escapeHtml(r.category || "")}</div>
+          </div>
+          <div class="macros">
+            ${r.total_kcal ?? "—"} kcal &middot; ${r.total_protein ?? "—"}g protein
+          </div>
+        </li>`
+        )
+        .join("") +
+      `</ul>`
+    : `<div class="empty-state">No recipes match the current filters.</div>`;
+
+  appEl.innerHTML = `
+    <div class="filters">
+      <input type="search" id="search-input" placeholder="Search by name&hellip;" value="${escapeHtml(currentSearch)}" />
+      <select id="status-filter">
+        <option value="all">All statuses</option>
+        <option value="core">Core</option>
+        <option value="trial">Trial</option>
+        <option value="retired">Retired</option>
+      </select>
+      <select id="category-filter">
+        <option value="all">All categories</option>
+      </select>
+    </div>
+    ${listHtml}
+  `;
+
+  document.getElementById("status-filter").value = currentStatus;
+  populateCategoryOptions();
+  document.getElementById("category-filter").value = currentCategory;
+
+  document.getElementById("search-input").addEventListener("input", (e) => {
+    currentSearch = e.target.value;
+    renderListView();
+  });
+  document.getElementById("status-filter").addEventListener("change", (e) => {
+    currentStatus = e.target.value;
+    renderListView();
+  });
+  document.getElementById("category-filter").addEventListener("change", (e) => {
+    currentCategory = e.target.value;
+    renderListView();
+  });
+
+  document.querySelectorAll(".recipe-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      window.location.hash = `#/recipe/${card.dataset.recipeId}`;
+    });
+  });
+}
+
+// ---------- Detail view ----------
+
+async function renderDetailView(recipeId) {
+  appEl.innerHTML = `<div class="empty-state">Loading recipe&hellip;</div>`;
+
+  // duckdb-wasm's connection.query() only takes a single SQL string - use
+  // a prepared statement for parameter binding (avoids string-interpolating
+  // user-controlled values into SQL, even though recipeId here only ever
+  // comes from our own URL hash router).
+  const recipeStmt = await conn.prepare(`
+    SELECT
+      r.recipe_id, r.name, r.category, r.status, r.servings, r.prep_time, r.steps, r.notes,
+      COALESCE(t.total_kcal, r.sheet_total_kcal)       AS total_kcal,
+      COALESCE(t.total_protein, r.sheet_total_protein) AS total_protein,
+      COALESCE(t.total_carbs, r.sheet_total_carbs)      AS total_carbs,
+      COALESCE(t.total_fat, r.sheet_total_fat)          AS total_fat
+    FROM recipes r
+    LEFT JOIN recipe_totals t USING (recipe_id)
+    WHERE r.recipe_id = ?
+  `);
+  const recipeResult = await recipeStmt.query(recipeId);
+  await recipeStmt.close();
+  const recipeRows = recipeResult.toArray().map((row) => row.toJSON());
+
+  if (recipeRows.length === 0) {
+    appEl.innerHTML = `
+      <a class="back-link" href="#/">&larr; Back to all recipes</a>
+      <div class="empty-state">Recipe "${escapeHtml(recipeId)}" was not found.</div>
+    `;
+    return;
+  }
+  const recipe = recipeRows[0];
+
+  const ingredientsStmt = await conn.prepare(`
+    SELECT ingredient_name, amount, unit, kcal, protein, carbs, fat
+    FROM ingredients
+    WHERE recipe_id = ?
+    ORDER BY ingredient_name
+  `);
+  const ingredientsResult = await ingredientsStmt.query(recipeId);
+  await ingredientsStmt.close();
+  const ingredients = ingredientsResult.toArray().map((row) => row.toJSON());
+
+  const steps = (recipe.steps || "")
+    .split(/(?:\r?\n)+|(?=\d+\.\s)/)
+    .map((s) => s.replace(/^\d+\.\s*/, "").trim())
+    .filter(Boolean);
+
+  const stepsHtml = steps.length
+    ? `<ol class="steps">${steps.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ol>`
+    : `<div class="empty-state">No steps recorded.</div>`;
+
+  const ingredientsHtml = ingredients.length
+    ? `
+      <table class="ingredients">
+        <thead>
+          <tr><th>Ingredient</th><th class="num">Amount</th><th class="num">Kcal</th><th class="num">Protein</th><th class="num">Carbs</th><th class="num">Fat</th></tr>
+        </thead>
+        <tbody>
+          ${ingredients
+            .map(
+              (i) => `
+            <tr>
+              <td>${escapeHtml(i.ingredient_name)}</td>
+              <td class="num">${escapeHtml(i.amount)} ${escapeHtml(i.unit)}</td>
+              <td class="num">${i.kcal ?? "—"}</td>
+              <td class="num">${i.protein ?? "—"}</td>
+              <td class="num">${i.carbs ?? "—"}</td>
+              <td class="num">${i.fat ?? "—"}</td>
+            </tr>`
+            )
+            .join("")}
+        </tbody>
+      </table>`
+    : `<div class="empty-state">No ingredients recorded.</div>`;
+
+  appEl.innerHTML = `
+    <a class="back-link" href="#/">&larr; Back to all recipes</a>
+    <div class="detail-header">
+      <h2>${escapeHtml(recipe.name)}</h2>
+      <span class="badge ${escapeHtml(recipe.status || "")}">${escapeHtml(recipe.status || "")}</span>
+    </div>
+    <div class="detail-sub">
+      ${escapeHtml(recipe.category || "")} &middot; ${escapeHtml(recipe.servings || "?")} serving(s) &middot; ${escapeHtml(recipe.prep_time || "")}
+    </div>
+
+    <div class="macro-row">
+      ${macroBox(recipe.total_kcal, "kcal")}
+      ${macroBox(recipe.total_protein, "protein (g)")}
+      ${macroBox(recipe.total_carbs, "carbs (g)")}
+      ${macroBox(recipe.total_fat, "fat (g)")}
+    </div>
+
+    <section class="block">
+      <h3>Steps</h3>
+      ${stepsHtml}
+    </section>
+
+    <section class="block">
+      <h3>Ingredients</h3>
+      ${ingredientsHtml}
+    </section>
+
+    ${
+      recipe.notes
+        ? `<section class="block"><h3>Notes</h3><div class="notes-box">${escapeHtml(recipe.notes)}</div></section>`
+        : ""
+    }
+  `;
+}
+
+// ---------- Routing ----------
+
+function currentRoute() {
+  // Hash format: "#/" for list, "#/recipe/R001" for detail.
+  const hash = window.location.hash || "#/";
+  const match = hash.match(/^#\/recipe\/(.+)$/);
+  return match ? { view: "detail", recipeId: decodeURIComponent(match[1]) } : { view: "list" };
+}
+
+async function renderRoute() {
+  const route = currentRoute();
+  if (route.view === "detail") {
+    await renderDetailView(route.recipeId);
+  } else {
+    renderListView();
+  }
+}
+
+window.addEventListener("hashchange", () => {
+  renderRoute().catch(showFatalError);
+});
+
+function showFatalError(err) {
+  console.error(err);
+  statusEl.textContent = "Something went wrong: " + (err && err.message ? err.message : err);
+  statusEl.classList.add("error");
+}
+
+// ---------- Boot ----------
+
+(async () => {
+  try {
+    conn = await initDatabase();
+    statusEl.textContent = "";
+    await loadRecipeList();
+    await renderRoute();
+  } catch (err) {
+    showFatalError(err);
+    appEl.innerHTML = `
+      <div class="empty-state">
+        Could not load the recipe database. Open the browser console for details,
+        and confirm data/tracker.duckdb exists next to this page (or ../data/tracker.duckdb
+        when viewing this file locally from the repo).
+      </div>`;
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+.DS_Store
+*.duckdb.tmp
+*.duckdb.tmp.wal
+*.duckdb.wal
+__pycache__/
+*.pyc

@@ -1,0 +1,44 @@
+name: Sync Google Sheet to DuckDB
+
+# Manual trigger only - click "Run workflow" in the Actions tab after
+# updating the Google Sheet. Opens a pull request with the rebuilt
+# data/tracker.duckdb rather than pushing straight to main, so you can
+# review the diff before it goes live.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install duckdb
+
+      - name: Run sync script
+        run: python scripts/sync.py
+
+      - name: Open pull request with updated DuckDB file
+        uses: peter-evans/create-pull-request@v6
+        with:
+          add-paths: data/tracker.duckdb
+          commit-message: "Sync recipes/ingredients from Google Sheet"
+          branch: sync/tracker-duckdb
+          title: "Sync tracker.duckdb from Google Sheet"
+          body: |
+            Automated sync from the Google Sheet (Recipes + Ingredients tabs)
+            via `scripts/sync.py`, triggered manually from the Actions tab.
+
+            Review the diff, then merge to trigger a Pages redeploy.
+          delete-branch: true
