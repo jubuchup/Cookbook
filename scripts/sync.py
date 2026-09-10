@@ -84,6 +84,27 @@ def build_database(recipes_csv_path: str, ingredients_csv_path: str, db_path: st
 
     con = duckdb.connect(tmp_db_path)
     try:
+        # Vegetarian and ImageURL are optional columns (added to the sheet
+        # after the initial build) - detect their presence so sync.py keeps
+        # working against older exports of the sheet that don't have them
+        # yet, rather than hard-failing with a "column not found" error.
+        recipes_columns = {
+            row[0]
+            for row in con.execute(
+                f"DESCRIBE SELECT * FROM read_csv_auto('{recipes_csv_path}', header=True, ALL_VARCHAR=False)"
+            ).fetchall()
+        }
+        # Cast defensively via VARCHAR rather than relying on DuckDB's type
+        # inference for the Vegetarian column, since Sheets CSV exports can
+        # produce either a native boolean or the literal text "TRUE"/"FALSE"
+        # depending on cell formatting.
+        vegetarian_expr = (
+            "COALESCE(lower(trim(CAST(Vegetarian AS VARCHAR))) IN ('true', '1', 'yes'), FALSE)"
+            if "Vegetarian" in recipes_columns
+            else "FALSE"
+        )
+        image_url_expr = "ImageURL" if "ImageURL" in recipes_columns else "NULL"
+
         con.execute(
             f"""
             CREATE TABLE recipes AS
@@ -99,7 +120,9 @@ def build_database(recipes_csv_path: str, ingredients_csv_path: str, db_path: st
                 TotalKcal      AS sheet_total_kcal,
                 TotalProtein   AS sheet_total_protein,
                 TotalCarbs     AS sheet_total_carbs,
-                TotalFat       AS sheet_total_fat
+                TotalFat       AS sheet_total_fat,
+                {vegetarian_expr} AS is_vegetarian,
+                {image_url_expr}  AS image_url
             FROM read_csv_auto('{recipes_csv_path}', header=True, ALL_VARCHAR=False)
             WHERE Name IS NOT NULL AND trim(Name) != ''
             """
