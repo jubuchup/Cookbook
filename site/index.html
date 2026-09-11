@@ -28,6 +28,11 @@
     --accent-soft: #f4e3d6;
     --green: #3f6b4a;
     --green-soft: #e6efe8;
+    --trial: #c98a1f;
+    --trial-soft: #f6ead1;
+    --retired: #9a9284;
+    --retired-soft: #eeece7;
+    --display-font: "Iowan Old Style", "Georgia", serif;
     --sidebar-bg: #22301f;
     --sidebar-text: #eef1e8;
     --sidebar-muted: #a9b39c;
@@ -126,7 +131,63 @@
   #status-line.error { color: #b3261e; }
   #status-line:empty { display: none; }
 
-  /* ---------- Filters ---------- */
+  /* ---------- Status tabs (primary filter) ---------- */
+  .status-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .status-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+  }
+  .status-tab .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+  .status-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
+  .status-tab.active .dot { opacity: 1; }
+  .status-tab:not(.active):hover { border-color: var(--text); color: var(--text); }
+
+  /* ---------- Needs-a-decision nudge ---------- */
+  .nudge-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--trial-soft);
+    border: 1px solid var(--trial);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: 0.88rem;
+    color: #7a5813;
+  }
+  .nudge-banner .nudge-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .nudge-banner .nudge-text { flex: 1; }
+  .nudge-banner .nudge-text b { color: var(--text); }
+  .nudge-banner .nudge-action {
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--trial);
+    background: var(--panel);
+    border: 1px solid var(--trial);
+    border-radius: 999px;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nudge-banner .nudge-action:hover { background: var(--trial); color: #fff; }
+
+  /* ---------- Secondary filters (category / ingredient) ---------- */
   .filters {
     display: flex;
     gap: 10px;
@@ -157,6 +218,7 @@
   .recipe-card {
     background: var(--panel);
     border: 1px solid var(--border);
+    border-left: 4px solid var(--retired);
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
@@ -165,6 +227,9 @@
     display: flex;
     flex-direction: column;
   }
+  .recipe-card[data-status="core"] { border-left-color: var(--green); }
+  .recipe-card[data-status="trial"] { border-left-color: var(--trial); }
+  .recipe-card[data-status="retired"] { border-left-color: var(--retired); }
   .recipe-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(38,36,32,0.06), 0 10px 24px rgba(38,36,32,0.1); }
   .recipe-card:active { transform: translateY(0); }
 
@@ -199,7 +264,7 @@
   }
 
   .card-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-  .card-body .name { font-weight: 600; font-size: 0.98rem; line-height: 1.3; }
+  .card-body .name { font-weight: 600; font-size: 0.98rem; line-height: 1.3; font-family: var(--display-font); }
   .card-body .meta { font-size: 0.78rem; color: var(--muted); }
 
   .card-macros {
@@ -243,16 +308,28 @@
     font-size: 2.6rem;
     color: var(--accent);
     margin-bottom: 18px;
+    border-top: 4px solid var(--retired);
   }
+  .detail-hero[data-status="core"] { border-top-color: var(--green); }
+  .detail-hero[data-status="trial"] { border-top-color: var(--trial); }
+  .detail-hero[data-status="retired"] { border-top-color: var(--retired); }
   .detail-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .detail-header { margin-bottom: 4px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-  .detail-header h2 { margin: 0; font-size: 1.5rem; letter-spacing: -0.01em; }
+  .detail-header h2 { margin: 0; font-size: 1.7rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.15; font-family: var(--display-font); }
   .veggie-pill {
     display: inline-flex; align-items: center; gap: 4px;
     font-size: 0.72rem; font-weight: 600; color: var(--green);
     background: var(--green-soft); border-radius: 999px; padding: 3px 9px;
   }
+  .status-badge {
+    display: inline-flex; align-items: center;
+    font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;
+    border-radius: 999px; padding: 4px 10px;
+  }
+  .status-badge[data-status="core"] { background: var(--green-soft); color: var(--green); }
+  .status-badge[data-status="trial"] { background: var(--trial-soft); color: var(--trial); }
+  .status-badge[data-status="retired"] { background: var(--retired-soft); color: var(--muted); }
   .detail-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 18px; }
 
   .action-row { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -290,7 +367,7 @@
   .macro-box .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
 
   section.block { margin-bottom: 24px; }
-  section.block h3 { font-size: 0.98rem; margin: 0 0 10px; color: var(--text); font-weight: 700; }
+  section.block h3 { font-size: 1.15rem; margin: 0 0 10px; color: var(--text); font-weight: 600; font-family: var(--display-font); }
 
   table.ingredients { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
   table.ingredients th, table.ingredients td {
@@ -300,6 +377,15 @@
   }
   table.ingredients th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; }
   table.ingredients td.num, table.ingredients th.num { text-align: right; }
+
+  .tag-chip {
+    display: inline-flex; align-items: center;
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;
+    border-radius: 999px; padding: 2px 7px; margin-left: 4px;
+  }
+  .tag-chip.tag-protein { background: var(--green-soft); color: var(--green); }
+  .tag-chip.tag-carbs { background: var(--trial-soft); color: var(--trial); }
+  .tag-chip.tag-fat { background: var(--accent-soft); color: var(--accent); }
 
   ol.steps { padding-left: 22px; margin: 0; }
   ol.steps li { margin-bottom: 10px; }
@@ -685,15 +771,35 @@ function filteredRecipes() {
   });
 }
 
+function needsDecisionNudge() {
+  // Count-based half of the spec's "needs a decision" condition (§3c): the
+  // time-based half (no promote/retire in 2+ weeks) isn't implementable yet
+  // because the current Sheet/DuckDB schema has no status-changed timestamp
+  // column - only today's status, not history. Scoped down to count-only
+  // per the spec's own flagged Open Question (count vs. time vs. both).
+  const trialCount = allRecipes.filter((r) => r.status === "trial").length;
+  return trialCount >= 3 ? trialCount : 0;
+}
+
 function renderListView() {
   const rows = filteredRecipes();
+  const trialCount = needsDecisionNudge();
+
+  const nudgeHtml = trialCount
+    ? `
+      <div class="nudge-banner">
+        <span class="nudge-icon">&#9203;</span>
+        <span class="nudge-text">Your <b>trial pile</b> has <b>${trialCount} recipes</b> waiting on a call &mdash; promote the ones that stuck, retire the ones that didn't.</span>
+        <button class="nudge-action" id="nudge-view-trial">Review trial</button>
+      </div>`
+    : "";
 
   const gridHtml = rows.length
     ? `<ul class="recipe-grid">` +
       rows
         .map(
           (r) => `
-        <li class="recipe-card" data-recipe-id="${escapeHtml(r.recipe_id)}">
+        <li class="recipe-card" data-recipe-id="${escapeHtml(r.recipe_id)}" data-status="${escapeHtml(r.status || "")}">
           <div class="card-image">
             ${cardImageHtml(r.image_url)}
             ${r.is_vegetarian ? `<span class="veggie-badge" title="Vegetarian">&#127807;</span>` : ""}
@@ -714,15 +820,21 @@ function renderListView() {
       `</ul>`
     : `<div class="empty-state">No recipes match the current filters.</div>`;
 
+  function tab(status, label) {
+    const active = currentStatus === status;
+    return `<button class="status-tab${active ? " active" : ""}" data-status="${status}"><span class="dot"></span>${label}</button>`;
+  }
+
   appEl.innerHTML = `
+    ${nudgeHtml}
+    <div class="status-tabs">
+      ${tab("all", "All")}
+      ${tab("core", "Core")}
+      ${tab("trial", "Trial")}
+      ${tab("retired", "Retired")}
+    </div>
     <div class="filters">
       <input type="search" id="search-input" placeholder="Search by name&hellip;" value="${escapeHtml(currentSearch)}" />
-      <select id="status-filter">
-        <option value="all">All statuses</option>
-        <option value="core">Core</option>
-        <option value="trial">Trial</option>
-        <option value="retired">Retired</option>
-      </select>
       <select id="category-filter">
         <option value="all">All categories</option>
       </select>
@@ -733,7 +845,6 @@ function renderListView() {
     ${gridHtml}
   `;
 
-  document.getElementById("status-filter").value = currentStatus;
   populateCategoryOptions();
   document.getElementById("category-filter").value = currentCategory;
   populateIngredientOptions();
@@ -743,10 +854,19 @@ function renderListView() {
     currentSearch = e.target.value;
     renderListView();
   });
-  document.getElementById("status-filter").addEventListener("change", (e) => {
-    currentStatus = e.target.value;
-    renderListView();
+  document.querySelectorAll(".status-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentStatus = btn.dataset.status;
+      renderListView();
+    });
   });
+  const nudgeBtn = document.getElementById("nudge-view-trial");
+  if (nudgeBtn) {
+    nudgeBtn.addEventListener("click", () => {
+      currentStatus = "trial";
+      renderListView();
+    });
+  }
   document.getElementById("category-filter").addEventListener("change", (e) => {
     currentCategory = e.target.value;
     renderListView();
@@ -764,6 +884,29 @@ function renderListView() {
 }
 
 // ---------- Detail view ----------
+
+// Ingredient tag chip (Protein/Carb/Fat), colored by macro type per §3b/§4:
+// no explicit "macro type" column exists on ingredients, so the dominant
+// macro is inferred from which of protein/carbs/fat contributes the most
+// kcal for that row (protein & carbs 4 kcal/g, fat 9 kcal/g).
+function dominantMacroChip(i) {
+  const p = Number(i.protein) || 0;
+  const c = Number(i.carbs) || 0;
+  const f = Number(i.fat) || 0;
+  if (p === 0 && c === 0 && f === 0) return "";
+  const pKcal = p * 4, cKcal = c * 4, fKcal = f * 9;
+  const max = Math.max(pKcal, cKcal, fKcal);
+  if (max === 0) return "";
+  if (max === pKcal) return `<span class="tag-chip tag-protein">Protein</span>`;
+  if (max === cKcal) return `<span class="tag-chip tag-carbs">Carb</span>`;
+  return `<span class="tag-chip tag-fat">Fat</span>`;
+}
+
+function statusVerbCta(status) {
+  if (status === "trial") return { label: "Mark as core", target: "core" };
+  if (status === "core") return { label: "Retire", target: "retired" };
+  return { label: "Move to trial", target: "trial" };
+}
 
 function boldIngredientsInStep(stepText, ingredientNames) {
   // Escape the raw text first, then wrap ingredient-name matches in <strong>.
@@ -842,7 +985,7 @@ async function renderDetailView(recipeId) {
             .map(
               (i) => `
             <tr>
-              <td>${escapeHtml(i.ingredient_name)}</td>
+              <td>${escapeHtml(i.ingredient_name)}${dominantMacroChip(i)}</td>
               <td class="num">${escapeHtml(i.amount)} ${escapeHtml(i.unit)}</td>
               <td class="num">${i.kcal ?? "—"}</td>
               <td class="num">${i.protein ?? "—"}</td>
@@ -859,11 +1002,14 @@ async function renderDetailView(recipeId) {
     ? `<img src="${escapeHtml(recipe.image_url)}" alt="" onerror="this.closest('.detail-hero').innerHTML='&#127860;'" />`
     : "&#127860;";
 
+  const statusAction = statusVerbCta(recipe.status);
+
   appEl.innerHTML = `
     <a class="back-link" href="#/">&larr; Back to all recipes</a>
-    <div class="detail-hero">${heroHtml}</div>
+    <div class="detail-hero" data-status="${escapeHtml(recipe.status || "")}">${heroHtml}</div>
     <div class="detail-header">
       <h2>${escapeHtml(recipe.name)}</h2>
+      <span class="status-badge" data-status="${escapeHtml(recipe.status || "")}">${escapeHtml(recipe.status || "")}</span>
       ${recipe.is_vegetarian ? `<span class="veggie-pill">&#127807; Vegetarian</span>` : ""}
     </div>
     <div class="detail-sub">
@@ -871,7 +1017,8 @@ async function renderDetailView(recipeId) {
     </div>
 
     <div class="action-row">
-      <button class="btn primary" id="export-btn">&#128190; Save recipe card</button>
+      <button class="btn primary" id="status-cta-btn">${escapeHtml(statusAction.label)}</button>
+      <button class="btn" id="export-btn">&#128190; Save recipe card</button>
     </div>
 
     <div class="macro-row">
@@ -900,6 +1047,18 @@ async function renderDetailView(recipeId) {
 
   document.getElementById("export-btn").addEventListener("click", (evt) => {
     exportRecipeCard(recipe, ingredients, stepsHtmlList, evt.currentTarget);
+  });
+
+  document.getElementById("status-cta-btn").addEventListener("click", () => {
+    // The tracker is a read-only view of the Google Sheet (DuckDB is
+    // ATTACHed READ_ONLY) - there's no write path from the browser back to
+    // the Sheet, so the status-verb CTA can't flip the status in place yet.
+    // Surface the actual next step instead of a silent no-op.
+    alert(
+      `To ${statusAction.label.toLowerCase()} "${recipe.name}", change its Status ` +
+      `column to "${statusAction.target}" in the Google Sheet - the change will ` +
+      `show up here after the next sync.`
+    );
   });
 }
 
