@@ -314,34 +314,162 @@
     color: var(--muted);
   }
 
-  /* ---------- Print-only A5 recipe card ---------- */
-  #print-root { display: none; }
-
-  @media print {
-    body * { visibility: hidden; }
-    #print-root, #print-root * { visibility: visible; }
-    #print-root {
-      display: block;
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-    }
-    @page { size: A5; margin: 10mm; }
-    .print-card { font-family: Georgia, "Times New Roman", serif; color: #1c1a17; }
-    .print-card h1 { font-size: 1.5rem; margin: 0 0 2px; }
-    .print-card .print-sub { font-size: 0.8rem; color: #555; margin-bottom: 10px; font-family: -apple-system, sans-serif; }
-    .print-card .print-macros {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px;
-      font-family: -apple-system, sans-serif;
-    }
-    .print-card .print-macros div { text-align: center; border: 1px solid #ccc; border-radius: 6px; padding: 4px 2px; }
-    .print-card .print-macros .v { font-weight: 700; font-size: 0.85rem; }
-    .print-card .print-macros .l { font-size: 0.55rem; text-transform: uppercase; color: #666; }
-    .print-card h2 { font-size: 0.95rem; margin: 10px 0 4px; font-family: -apple-system, sans-serif; }
-    .print-card ol, .print-card ul { margin: 0; padding-left: 18px; font-size: 0.82rem; }
-    .print-card li { margin-bottom: 4px; }
-    .print-card strong { font-weight: 700; }
+  /* ---------- Exportable recipe card (rasterized to PNG, zine style) ----------
+     Rendered off-screen (not display:none - html2canvas can't rasterize that)
+     then captured with html2canvas and shared/downloaded. Deliberately styled
+     independently of the on-screen detail view so it reads as a printable
+     card/zine rather than a screenshot of the app chrome. */
+  #export-root {
+    position: fixed;
+    top: 0;
+    left: -9999px;
+    width: 640px;
+    z-index: -1;
   }
+  .export-card {
+    width: 640px;
+    box-sizing: border-box;
+    background: var(--bg);
+    border: 3px solid var(--text);
+    border-radius: 22px;
+    padding: 34px 38px 30px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--text);
+    position: relative;
+  }
+  .export-card::before {
+    content: "";
+    position: absolute;
+    top: 10px; left: 10px; right: 10px; bottom: 10px;
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    pointer-events: none;
+  }
+  .export-card .ec-kicker {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .export-card h1 {
+    font-family: "Iowan Old Style", Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    line-height: 1.15;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .export-card .ec-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .export-card .ec-veggie {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--green);
+    background: var(--green-soft);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .export-card .ec-macros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .export-card .ec-macros div {
+    text-align: center;
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 10px 4px;
+  }
+  .export-card .ec-macros .v {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--accent);
+    display: block;
+  }
+  .export-card .ec-macros .l {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .export-card h2 {
+    font-family: "Iowan Old Style", Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--green);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  .export-card .ec-section { margin-bottom: 22px; }
+  .export-card ul.ec-ingredients { list-style: none; margin: 0; padding: 0; }
+  .export-card ul.ec-ingredients li {
+    font-size: 0.86rem;
+    padding: 5px 0 5px 22px;
+    position: relative;
+    border-bottom: 1px dashed var(--border);
+  }
+  .export-card ul.ec-ingredients li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 10px; height: 10px;
+    border: 2px solid var(--green);
+    border-radius: 3px;
+  }
+  .export-card ol.ec-steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: ec-step;
+  }
+  .export-card ol.ec-steps li {
+    counter-increment: ec-step;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding-left: 30px;
+    position: relative;
+  }
+  .export-card ol.ec-steps li::before {
+    content: counter(ec-step);
+    position: absolute;
+    left: 0; top: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--text);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .export-card ol.ec-steps strong { color: var(--accent); font-weight: 700; }
+  .export-card .ec-notes {
+    font-size: 0.82rem;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .export-card .ec-footer {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .export-card .ec-footer .accent-dot { color: var(--accent); }
 
   /* ---------- Responsive: desktop sidebar on, mobile off ---------- */
   @media (min-width: 900px) {
@@ -385,14 +513,15 @@
   </div>
 </div>
 
-<div id="print-root"></div>
+<div id="export-root"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script type="module">
 import * as duckdb from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.32.0/+esm";
 
 const statusEl = document.getElementById("status-line");
 const appEl = document.getElementById("app");
-const printRootEl = document.getElementById("print-root");
+const exportRootEl = document.getElementById("export-root");
 
 let conn = null; // duckdb-wasm connection, set once the DB has loaded
 
@@ -742,7 +871,7 @@ async function renderDetailView(recipeId) {
     </div>
 
     <div class="action-row">
-      <button class="btn primary" id="print-btn">&#128424; Print / Save as PDF</button>
+      <button class="btn primary" id="export-btn">&#128190; Save recipe card</button>
     </div>
 
     <div class="macro-row">
@@ -769,33 +898,113 @@ async function renderDetailView(recipeId) {
     }
   `;
 
-  document.getElementById("print-btn").addEventListener("click", () => {
-    renderPrintCard(recipe, ingredients, stepsHtmlList);
-    window.print();
+  document.getElementById("export-btn").addEventListener("click", (evt) => {
+    exportRecipeCard(recipe, ingredients, stepsHtmlList, evt.currentTarget);
   });
 }
 
-function renderPrintCard(recipe, ingredients, stepsHtmlList) {
+/**
+ * Builds the off-screen zine-style export card, rasterizes it with
+ * html2canvas, and hands the resulting PNG to the user.
+ *
+ * window.print() previously drove this feature, but it is a no-op when the
+ * site is launched from the iOS home screen (standalone display mode has no
+ * browser chrome, so there is no print dialog for it to open). Rendering to
+ * an image and using the Web Share API (falling back to a direct <a download>
+ * link) works in both standalone and regular-browser contexts.
+ */
+async function exportRecipeCard(recipe, ingredients, stepsHtmlList, triggerBtn) {
+  const originalLabel = triggerBtn.innerHTML;
+  triggerBtn.disabled = true;
+  triggerBtn.innerHTML = "&#8987; Preparing&hellip;";
+
+  try {
+    renderExportCard(recipe, ingredients, stepsHtmlList);
+    // Let the browser lay out/paint the off-screen node before capturing it.
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    const cardNode = exportRootEl.querySelector(".export-card");
+    const canvas = await html2canvas(cardNode, {
+      scale: 2,
+      backgroundColor: "#faf7f1",
+      useCORS: true,
+    });
+
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    const fileName = `${slugify(recipe.name) || "recipe"}.png`;
+    const file = new File([blob], fileName, { type: "image/png" });
+
+    // Web Share API (with file support) is what actually works from an iOS
+    // home-screen PWA - it hands off to the native share sheet, which offers
+    // Save Image / AirDrop / Files, etc. Regular desktop/Android browsers
+    // that lack file-sharing support fall back to a plain download link.
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: recipe.name || "Recipe",
+      });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+  } catch (err) {
+    // AbortError fires when the user just dismisses the native share sheet -
+    // that's a normal cancel, not a failure worth surfacing.
+    if (err && err.name !== "AbortError") {
+      console.error("Recipe card export failed:", err);
+      alert("Sorry, couldn't create the recipe card image. Please try again.");
+    }
+  } finally {
+    exportRootEl.innerHTML = "";
+    triggerBtn.disabled = false;
+    triggerBtn.innerHTML = originalLabel;
+  }
+}
+
+function slugify(str) {
+  return String(str || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function renderExportCard(recipe, ingredients, stepsHtmlList) {
   const ingredientsLi = ingredients
     .map((i) => `<li>${escapeHtml(i.amount)} ${escapeHtml(i.unit)} ${escapeHtml(i.ingredient_name)}</li>`)
     .join("");
-  printRootEl.innerHTML = `
-    <div class="print-card">
-      <h1>${escapeHtml(recipe.name)}${recipe.is_vegetarian ? " &#127807;" : ""}</h1>
-      <div class="print-sub">
+  exportRootEl.innerHTML = `
+    <div class="export-card">
+      <div class="ec-kicker">Cookbook &middot; Recipe Card</div>
+      <h1>${escapeHtml(recipe.name)}${recipe.is_vegetarian ? `<span class="ec-veggie">&#127807; Vegetarian</span>` : ""}</h1>
+      <div class="ec-sub">
         ${escapeHtml(recipe.category || "")} &middot; ${escapeHtml(recipe.servings || "?")} serving(s) &middot; ${escapeHtml(recipe.prep_time || "")}
       </div>
-      <div class="print-macros">
-        <div><div class="v">${Math.round(recipe.total_kcal ?? 0)}</div><div class="l">kcal</div></div>
-        <div><div class="v">${Math.round(recipe.total_protein ?? 0)}g</div><div class="l">protein</div></div>
-        <div><div class="v">${Math.round(recipe.total_carbs ?? 0)}g</div><div class="l">carbs</div></div>
-        <div><div class="v">${Math.round(recipe.total_fat ?? 0)}g</div><div class="l">fat</div></div>
+      <div class="ec-macros">
+        <div><span class="v">${Math.round(recipe.total_kcal ?? 0)}</span><span class="l">kcal</span></div>
+        <div><span class="v">${Math.round(recipe.total_protein ?? 0)}g</span><span class="l">protein</span></div>
+        <div><span class="v">${Math.round(recipe.total_carbs ?? 0)}g</span><span class="l">carbs</span></div>
+        <div><span class="v">${Math.round(recipe.total_fat ?? 0)}g</span><span class="l">fat</span></div>
       </div>
-      <h2>Ingredients</h2>
-      <ul>${ingredientsLi}</ul>
-      <h2>Steps</h2>
-      <ol>${stepsHtmlList.join("")}</ol>
-      ${recipe.notes ? `<h2>Notes</h2><p style="font-size:0.8rem;">${escapeHtml(recipe.notes)}</p>` : ""}
+      <div class="ec-section">
+        <h2>Ingredients</h2>
+        <ul class="ec-ingredients">${ingredientsLi}</ul>
+      </div>
+      <div class="ec-section">
+        <h2>Steps</h2>
+        <ol class="ec-steps">${stepsHtmlList.join("")}</ol>
+      </div>
+      ${
+        recipe.notes
+          ? `<div class="ec-section"><h2>Notes</h2><div class="ec-notes">${escapeHtml(recipe.notes)}</div></div>`
+          : ""
+      }
+      <div class="ec-footer">Cookbook<span class="accent-dot">.</span> personal recipe tracker</div>
     </div>
   `;
 }
