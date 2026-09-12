@@ -136,10 +136,10 @@ def build_database(recipes_csv_path: str, ingredients_csv_path: str, db_path: st
                 IngredientName  AS ingredient_name,
                 Amount          AS amount,
                 Unit            AS unit,
-                Kcal            AS kcal,
-                Protein         AS protein,
-                Carbs           AS carbs,
-                Fat             AS fat
+                Kcal::DOUBLE            AS kcal,
+                Protein::DOUBLE         AS protein,
+                Carbs::DOUBLE           AS carbs,
+                Fat::DOUBLE             AS fat
             FROM read_csv_auto('{ingredients_csv_path}', header=True, ALL_VARCHAR=False)
             """
         )
