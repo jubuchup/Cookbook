@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ios-bg: #F2F2F7;
+    --ios-card: #FFFFFF;
+    --ios-text: #1C1C1E;
+    --ios-subtext: #8E8E93;
+    --ios-accent: #FF3B30; /* iOS Warm Coral/Red for Cookbook */
+    --ios-separator: rgba(60, 60, 67, 0.12);
+  }
+
+  .dark {
+    --ios-bg: #000000;
+    --ios-card: #1C1C1E;
+    --ios-text: #F2F2F7;
+    --ios-subtext: #98989D;
+    --ios-accent: #FF453A;
+    --ios-separator: rgba(84, 84, 88, 0.35);
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    background-color: var(--ios-bg);
+    color: var(--ios-text);
+  }
+}
+
+/* Hide scrollbars for clean iOS feel */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* iOS bounce and momentum scrolling */
+.ios-scroll {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Safe area insets */
+.pt-safe {
+  padding-top: max(12px, env(safe-area-inset-top, 16px));
+}
+
+.pb-safe {
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 24px));
+}
+
+.pb-tab-bar {
+  padding-bottom: max(84px, calc(64px + env(safe-area-inset-bottom, 20px)));
+}
