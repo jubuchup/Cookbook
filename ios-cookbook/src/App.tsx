@@ -4,7 +4,6 @@ import {
   SlidersHorizontal,
   Plus,
   BookOpen,
-  Heart,
   RefreshCw,
   X,
 } from 'lucide-react';
@@ -127,14 +126,6 @@ export default function App() {
   // Compute filtered & sorted recipes
   const filteredRecipes = useMemo(() => {
     return recipes.filter((recipe) => {
-      // Tab based filters
-      if (currentTab === 'favorites' && !recipe.isFavorite) {
-        return false;
-      }
-      if (currentTab === 'quick' && recipe.prepTimeMinutes > 20) {
-        return false;
-      }
-
       // Search Query
       if (filters.searchQuery.trim()) {
         const q = filters.searchQuery.toLowerCase().trim();
@@ -184,8 +175,6 @@ export default function App() {
     });
   }, [recipes, currentTab, filters]);
 
-  const favoritesCount = useMemo(() => recipes.filter((r) => r.isFavorite).length, [recipes]);
-
   const activeFiltersCount = useMemo(() => {
     let count = 0;
     if (filters.mealType !== 'All') count++;
@@ -198,12 +187,11 @@ export default function App() {
   const mealTypes: (MealType | 'All')[] = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Snack', 'Dessert'];
 
   return (
-    <div className="min-h-screen bg-[#F2F2F7] dark:bg-[#000000] font-sans antialiased md:flex">
+    <div className="min-h-screen bg-[#F5F6F8] dark:bg-[#0B1220] font-sans antialiased md:flex">
       {/* Desktop Sidebar Navigation */}
       <Sidebar
         currentTab={currentTab}
         onSelectTab={handleSelectTab}
-        favoritesCount={favoritesCount}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
         onAddRecipe={() => setShowAddModal(true)}
@@ -214,27 +202,15 @@ export default function App() {
         {/* Top App Header */}
         <div className="px-5 md:px-8 pt-6 pb-3 flex items-center justify-between">
           <div className="md:hidden">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF3B30] dark:text-[#FF453A]">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#1E3A8A] dark:text-[#5B8DEF]">
               Personal Kitchen
             </span>
             <h1 className="text-2xl sm:text-3xl font-black text-[#1C1C1E] dark:text-[#F2F2F7] tracking-tight">
-              {currentTab === 'cookbook'
-                ? 'Cookbook'
-                : currentTab === 'favorites'
-                ? 'Favorites'
-                : currentTab === 'quick'
-                ? 'Under 20 Mins'
-                : 'Pantry Chef'}
+              {currentTab === 'cookbook' ? 'Cookbook' : 'Pantry Chef'}
             </h1>
           </div>
           <h2 className="hidden md:block text-xl font-bold text-[#1C1C1E] dark:text-[#F2F2F7]">
-            {currentTab === 'cookbook'
-              ? 'All Recipes'
-              : currentTab === 'favorites'
-              ? 'Favorites'
-              : currentTab === 'quick'
-              ? 'Under 20 Mins'
-              : 'Pantry Chef'}
+            {currentTab === 'cookbook' ? 'All Recipes' : 'Pantry Chef'}
           </h2>
 
           <div className="flex items-center gap-2 md:hidden">
@@ -244,7 +220,7 @@ export default function App() {
                 haptics.tap();
                 setShowAddModal(true);
               }}
-              className="w-9 h-9 rounded-full bg-white dark:bg-[#1C1C1E] shadow-xs border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-center text-[#FF3B30] active:scale-90 transition"
+              className="w-9 h-9 rounded-full bg-white dark:bg-[#1C1C1E] shadow-xs border border-black/[0.06] dark:border-white/[0.08] flex items-center justify-center text-[#1E3A8A] dark:text-[#5B8DEF] active:scale-90 transition"
               title="Add New Recipe"
             >
               <Plus className="w-5 h-5 stroke-[2.5]" />
@@ -266,7 +242,7 @@ export default function App() {
                 placeholder="Search recipes, tags, ingredients..."
                 value={filters.searchQuery}
                 onChange={(e) => setFilters({ ...filters, searchQuery: e.target.value })}
-                className="w-full pl-9 pr-8 py-2 text-xs rounded-2xl bg-white dark:bg-[#1C1C1E] border border-black/[0.06] dark:border-white/[0.08] text-[#1C1C1E] dark:text-[#F2F2F7] placeholder-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-[#FF3B30]/30 shadow-xs"
+                className="w-full pl-9 pr-8 py-2 text-xs rounded-2xl bg-white dark:bg-[#1C1C1E] border border-black/[0.06] dark:border-white/[0.08] text-[#1C1C1E] dark:text-[#F2F2F7] placeholder-neutral-400 focus:outline-hidden focus:ring-2 focus:ring-[#1E3A8A]/30 shadow-xs"
               />
               {filters.searchQuery && (
                 <button
@@ -286,7 +262,7 @@ export default function App() {
               }}
               className={`p-2.5 rounded-2xl border transition active:scale-90 relative ${
                 activeFiltersCount > 0
-                  ? 'bg-[#FF3B30] border-[#FF3B30] text-white shadow-xs'
+                  ? 'bg-[#1E3A8A] border-[#1E3A8A] text-white shadow-xs'
                   : 'bg-white dark:bg-[#1C1C1E] border-black/[0.06] dark:border-white/[0.08] text-neutral-700 dark:text-neutral-300'
               }`}
             >
@@ -315,7 +291,7 @@ export default function App() {
                     }}
                     className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all active:scale-95 ${
                       isSelected
-                        ? 'bg-[#FF3B30] text-white shadow-xs'
+                        ? 'bg-[#1E3A8A] text-white shadow-xs'
                         : 'bg-white dark:bg-[#1C1C1E] text-neutral-600 dark:text-neutral-300 border border-black/[0.05] dark:border-white/[0.08]'
                     }`}
                   >
@@ -329,7 +305,7 @@ export default function App() {
 
         {/* Active Filters Pill Bar (if any filters active) */}
         {activeFiltersCount > 0 && (
-          <div className="px-5 md:px-8 pb-2 flex items-center justify-between text-xs text-[#FF3B30] font-medium">
+          <div className="px-5 md:px-8 pb-2 flex items-center justify-between text-xs text-[#1E3A8A] dark:text-[#5B8DEF] font-medium">
             <span>
               {filteredRecipes.length} of {recipes.length} recipes matched
             </span>
@@ -357,7 +333,7 @@ export default function App() {
         <div className="flex-1 overflow-y-auto ios-scroll px-5 md:px-8 pb-28 md:pb-10 pt-1">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 text-neutral-400 space-y-3">
-              <RefreshCw className="w-6 h-6 animate-spin text-[#FF3B30]" />
+              <RefreshCw className="w-6 h-6 animate-spin text-[#1E3A8A] dark:text-[#5B8DEF]" />
               <span className="text-xs font-medium">Opening your cookbook database...</span>
             </div>
           ) : currentTab === 'fridge' ? (
@@ -384,21 +360,13 @@ export default function App() {
             /* Empty State */
             <div className="text-center py-16 px-6 space-y-4">
               <div className="w-16 h-16 rounded-full bg-neutral-200 dark:bg-neutral-800 mx-auto flex items-center justify-center text-neutral-400">
-                {currentTab === 'favorites' ? (
-                  <Heart className="w-8 h-8" />
-                ) : (
-                  <BookOpen className="w-8 h-8" />
-                )}
+                <BookOpen className="w-8 h-8" />
               </div>
               <h3 className="text-base font-bold text-[#1C1C1E] dark:text-[#F2F2F7]">
-                {currentTab === 'favorites'
-                  ? 'No Favorite Recipes Yet'
-                  : 'No Recipes Match Your Filter'}
+                No Recipes Match Your Filter
               </h3>
               <p className="text-xs text-[#8E8E93] dark:text-[#98989D] max-w-xs mx-auto leading-relaxed">
-                {currentTab === 'favorites'
-                  ? 'Tap the heart icon on any recipe to keep your go-to dishes right here.'
-                  : 'Try relaxing your ingredient, meal type, or prep time filters to see more dishes.'}
+                Try relaxing your ingredient, meal type, or prep time filters to see more dishes.
               </p>
               {activeFiltersCount > 0 && (
                 <button
@@ -412,7 +380,7 @@ export default function App() {
                       onlyFavorites: false,
                     })
                   }
-                  className="px-4 py-2 rounded-full bg-[#FF3B30] text-white text-xs font-bold shadow-xs active:scale-95 transition"
+                  className="px-4 py-2 rounded-full bg-[#1E3A8A] text-white text-xs font-bold shadow-xs active:scale-95 transition"
                 >
                   Clear Filters
                 </button>
@@ -425,7 +393,6 @@ export default function App() {
         <IOSTabBar
           currentTab={currentTab}
           onSelectTab={handleSelectTab}
-          favoritesCount={favoritesCount}
         />
 
         {/* Recipe Detail Modal Sheet */}

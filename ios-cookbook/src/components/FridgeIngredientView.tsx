@@ -44,12 +44,7 @@ export const FridgeIngredientView: React.FC<FridgeIngredientViewProps> = ({
   recipes,
   onSelectRecipe,
 }) => {
-  const [selectedInFridge, setSelectedInFridge] = useState<string[]>([
-    'Eggs',
-    'Garlic',
-    'Ripe Avocado',
-    'Sourdough Bread',
-  ]);
+  const [selectedInFridge, setSelectedInFridge] = useState<string[]>([]);
 
   const toggleItem = (name: string) => {
     haptics.tap();
@@ -80,7 +75,7 @@ export const FridgeIngredientView: React.FC<FridgeIngredientViewProps> = ({
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* Intro Header */}
       <div className="bg-white dark:bg-[#1C1C1E] p-5 rounded-3xl border border-black/[0.05] dark:border-white/[0.08] shadow-xs">
-        <div className="flex items-center gap-2 text-[#FF3B30] mb-1 font-bold text-xs uppercase tracking-wider">
+        <div className="flex items-center gap-2 text-[#1E3A8A] dark:text-[#5B8DEF] mb-1 font-bold text-xs uppercase tracking-wider">
           <Sparkles className="w-4 h-4" />
           <span>Pantry & Fridge Chef</span>
         </div>
@@ -99,7 +94,7 @@ export const FridgeIngredientView: React.FC<FridgeIngredientViewProps> = ({
           {selectedInFridge.length > 0 && (
             <button
               onClick={() => setSelectedInFridge([])}
-              className="text-xs text-[#FF3B30] font-bold"
+              className="text-xs text-[#1E3A8A] dark:text-[#5B8DEF] font-bold"
             >
               Clear all
             </button>
@@ -125,7 +120,7 @@ export const FridgeIngredientView: React.FC<FridgeIngredientViewProps> = ({
                       onClick={() => toggleItem(item.name)}
                       className={`py-2 px-3 rounded-2xl text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-95 ${
                         isChecked
-                          ? 'bg-[#FF3B30] text-white shadow-xs'
+                          ? 'bg-[#1E3A8A] text-white shadow-xs'
                           : 'bg-white dark:bg-[#1C1C1E] text-[#1C1C1E] dark:text-[#F2F2F7] border border-black/[0.06] dark:border-white/[0.08]'
                       }`}
                     >
