@@ -1,0 +1,15 @@
+{
+  // Config for Cloudflare's Workers & Pages "Deploy command: npx wrangler
+  // deploy" build setting. This app has no server-side Worker code — it's
+  // a pure static SPA (built by `npm run build` into dist/) served via
+  // Workers Static Assets. All data access happens client-side against
+  // Supabase; see src/services/supabaseClient.ts.
+  "name": "ios-cookbook",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths so client-side routing (if added
+    // later) and direct deep-links don't 404.
+    "not_found_handling": "single-page-application"
+  }
+}
