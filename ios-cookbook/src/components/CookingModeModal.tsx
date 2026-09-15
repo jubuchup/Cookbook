@@ -117,7 +117,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
   const scale = servings / (recipe.servings || 1);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#000000] text-white flex flex-col justify-between select-none animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 bg-[#0B1220] text-white flex flex-col justify-between select-none animate-in fade-in duration-200">
       {/* Top Controls Bar */}
       <div className="flex items-center justify-between px-6 pt-12 pb-4 border-b border-neutral-800">
         <button
@@ -145,7 +145,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
           }}
           className={`w-10 h-10 rounded-full border flex items-center justify-center active:scale-90 transition ${
             showIngredientsDrawer
-              ? 'bg-[#FF3B30] border-[#FF3B30] text-white'
+              ? 'bg-[#1E3A8A] border-[#1E3A8A] text-white'
               : 'bg-neutral-900 border-neutral-800 text-neutral-300'
           }`}
           title="Ingredients Quick View"
@@ -161,7 +161,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
             key={i}
             className={`h-1 flex-1 rounded-full transition-all duration-300 ${
               i === currentStepIdx
-                ? 'bg-[#FF3B30]'
+                ? 'bg-[#1E3A8A]'
                 : i < currentStepIdx
                 ? 'bg-neutral-600'
                 : 'bg-neutral-800'
@@ -176,7 +176,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
           <div className="space-y-6 animate-in slide-in-from-right-4 duration-200 key={currentStepIdx}">
             {/* Step Counter */}
             <div className="flex items-center justify-between">
-              <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-bold tracking-wider text-[#FF453A] uppercase">
+              <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-bold tracking-wider text-[#FACC15] uppercase">
                 Step {step.stepNumber} of {totalSteps}
               </span>
 
@@ -214,7 +214,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
               <div className="p-4 bg-neutral-900/90 border border-neutral-800 rounded-3xl flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                    isTimerRunning ? 'bg-[#FF3B30]/20 text-[#FF453A]' : 'bg-neutral-800 text-neutral-400'
+                    isTimerRunning ? 'bg-[#1E3A8A]/20 text-[#5B8DEF]' : 'bg-neutral-800 text-neutral-400'
                   }`}>
                     <Clock className="w-6 h-6 animate-spin-slow" />
                   </div>
@@ -238,7 +238,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
                     className={`w-11 h-11 rounded-full flex items-center justify-center active:scale-90 transition ${
                       isTimerRunning
                         ? 'bg-amber-500 text-black'
-                        : 'bg-[#FF3B30] text-white'
+                        : 'bg-[#1E3A8A] text-white'
                     }`}
                   >
                     {isTimerRunning ? <Pause className="w-5 h-5 fill-current" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
@@ -262,7 +262,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
         ) : (
           /* Completion Screen */
           <div className="text-center space-y-5 py-8 animate-in zoom-in-95 duration-300">
-            <div className="w-20 h-20 bg-gradient-to-tr from-[#FF3B30] to-[#FF2A68] rounded-full mx-auto flex items-center justify-center shadow-xl shadow-[#FF3B30]/30">
+            <div className="w-20 h-20 bg-gradient-to-tr from-[#1E3A8A] to-[#3B6FD9] rounded-full mx-auto flex items-center justify-center shadow-xl shadow-[#1E3A8A]/30">
               <CheckCircle className="w-10 h-10 text-white" />
             </div>
 
@@ -319,7 +319,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
 
       {/* Bottom Step Navigation Bar */}
       {!isFinished && (
-        <div className="p-6 bg-[#000000]/90 backdrop-blur-md border-t border-neutral-900 flex items-center justify-between gap-4 max-w-lg mx-auto w-full">
+        <div className="p-6 bg-[#0B1220]/90 backdrop-blur-md border-t border-neutral-900 flex items-center justify-between gap-4 max-w-lg mx-auto w-full">
           <button
             id="cooking-prev-step-btn"
             onClick={handlePrevStep}
@@ -333,7 +333,7 @@ export const CookingModeModal: React.FC<CookingModeModalProps> = ({
           <button
             id="cooking-next-step-btn"
             onClick={handleNextStep}
-            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#FF3B30] text-white font-bold text-sm shadow-lg shadow-[#FF3B30]/30 active:scale-95 transition"
+            className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#1E3A8A] text-white font-bold text-sm shadow-lg shadow-[#1E3A8A]/30 active:scale-95 transition"
           >
             <span>{currentStepIdx === totalSteps - 1 ? 'Finish Dish' : 'Next Step'}</span>
             <ChevronRight className="w-4 h-4" />

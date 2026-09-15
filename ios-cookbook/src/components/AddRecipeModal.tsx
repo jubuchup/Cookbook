@@ -241,7 +241,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
     <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="absolute inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-lg mx-auto bg-[#F2F2F7] dark:bg-[#1C1C1E] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl">
+      <div className="relative w-full max-w-lg mx-auto bg-[#F5F6F8] dark:bg-[#1C1C1E] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl">
         {/* Pull handle */}
         <div className="w-full flex justify-center pt-3 pb-1">
           <div className="w-10 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
@@ -264,7 +264,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
               type="button"
               onClick={handleSubmit}
               disabled={!title.trim()}
-              className="text-xs font-bold text-[#FF3B30] disabled:opacity-40"
+              className="text-xs font-bold text-[#1E3A8A] disabled:opacity-40"
             >
               Save
             </button>
@@ -273,7 +273,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
               type="button"
               onClick={handlePasteSubmit}
               disabled={!pasteText.trim()}
-              className="text-xs font-bold text-[#FF3B30] disabled:opacity-40"
+              className="text-xs font-bold text-[#1E3A8A] disabled:opacity-40"
             >
               Create
             </button>
@@ -290,7 +290,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
             }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition ${
               mode === 'manual'
-                ? 'bg-[#FF3B30] text-white shadow-xs'
+                ? 'bg-[#1E3A8A] text-white shadow-xs'
                 : 'bg-white dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 border border-black/[0.06] dark:border-white/[0.08]'
             }`}
           >
@@ -304,7 +304,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
             }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition ${
               mode === 'paste'
-                ? 'bg-[#FF3B30] text-white shadow-xs'
+                ? 'bg-[#1E3A8A] text-white shadow-xs'
                 : 'bg-white dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 border border-black/[0.06] dark:border-white/[0.08]'
             }`}
           >
@@ -317,7 +317,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
           /* Paste Recipe JSON Flow */
           <div className="overflow-y-auto ios-scroll p-5 space-y-4 pb-24">
             <div className="bg-white dark:bg-neutral-900 p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] space-y-3">
-              <div className="flex items-center gap-2 text-[#FF3B30] font-bold text-xs uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#1E3A8A] font-bold text-xs uppercase tracking-wider">
                 <Sparkles className="w-4 h-4" />
                 <span>Step 1 — Get the JSON from a chat AI</span>
               </div>
@@ -344,7 +344,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
             </div>
 
             <div className="bg-white dark:bg-neutral-900 p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] space-y-3">
-              <div className="flex items-center gap-2 text-[#FF3B30] font-bold text-xs uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[#1E3A8A] font-bold text-xs uppercase tracking-wider">
                 <ClipboardPaste className="w-4 h-4" />
                 <span>Step 2 — Paste the JSON here</span>
               </div>
@@ -368,7 +368,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
                 type="button"
                 onClick={handlePasteSubmit}
                 disabled={!pasteText.trim()}
-                className="w-full py-4 rounded-2xl bg-[#FF3B30] text-white font-bold text-sm shadow-md active:scale-95 disabled:opacity-40 transition"
+                className="w-full py-4 rounded-2xl bg-[#1E3A8A] text-white font-bold text-sm shadow-md active:scale-95 disabled:opacity-40 transition"
               >
                 Create Recipe from Pasted JSON
               </button>
@@ -389,7 +389,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
                 placeholder="e.g. Lemon Rosemary Roast Chicken"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full text-base font-semibold text-[#1C1C1E] dark:text-[#F2F2F7] bg-transparent border-b border-neutral-200 dark:border-neutral-800 pb-1.5 focus:outline-hidden focus:border-[#FF3B30]"
+                className="w-full text-base font-semibold text-[#1C1C1E] dark:text-[#F2F2F7] bg-transparent border-b border-neutral-200 dark:border-neutral-800 pb-1.5 focus:outline-hidden focus:border-[#1E3A8A]"
               />
             </div>
 
@@ -402,7 +402,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
                 placeholder="A brief culinary note..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full text-xs text-[#1C1C1E] dark:text-[#F2F2F7] bg-transparent border-b border-neutral-200 dark:border-neutral-800 pb-1 focus:outline-hidden focus:border-[#FF3B30]"
+                className="w-full text-xs text-[#1C1C1E] dark:text-[#F2F2F7] bg-transparent border-b border-neutral-200 dark:border-neutral-800 pb-1 focus:outline-hidden focus:border-[#1E3A8A]"
               />
             </div>
           </div>
@@ -432,7 +432,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
                     }}
                     className={`text-[11px] px-2.5 py-1 rounded-full font-medium transition ${
                       imageUrl === p.url
-                        ? 'bg-[#FF3B30] text-white'
+                        ? 'bg-[#1E3A8A] text-white'
                         : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300'
                     }`}
                   >
@@ -575,7 +575,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
               <button
                 type="button"
                 onClick={addIngredient}
-                className="text-xs font-bold text-[#FF3B30] flex items-center gap-1"
+                className="text-xs font-bold text-[#1E3A8A] flex items-center gap-1"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Add Item
@@ -627,7 +627,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
               <button
                 type="button"
                 onClick={addStep}
-                className="text-xs font-bold text-[#FF3B30] flex items-center gap-1"
+                className="text-xs font-bold text-[#1E3A8A] flex items-center gap-1"
               >
                 <Plus className="w-3.5 h-3.5" />
                 Add Step
@@ -638,7 +638,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
               {steps.map((s, idx) => (
                 <div key={s.stepNumber} className="p-3 bg-neutral-50 dark:bg-neutral-800/60 rounded-xl space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#FF3B30]">Step {s.stepNumber}</span>
+                    <span className="text-xs font-bold text-[#1E3A8A]">Step {s.stepNumber}</span>
                     <button
                       type="button"
                       onClick={() => removeStep(idx)}
@@ -694,7 +694,7 @@ export const AddRecipeModal: React.FC<AddRecipeModalProps> = ({ onClose, onSave 
             type="submit"
             id="save-recipe-submit-btn"
             disabled={!title.trim()}
-            className="w-full py-4 rounded-2xl bg-[#FF3B30] text-white font-bold text-sm shadow-md active:scale-95 disabled:opacity-40 transition"
+            className="w-full py-4 rounded-2xl bg-[#1E3A8A] text-white font-bold text-sm shadow-md active:scale-95 disabled:opacity-40 transition"
           >
             Save Recipe to Database
           </button>

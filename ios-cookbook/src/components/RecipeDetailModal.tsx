@@ -82,7 +82,7 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Main Sheet */}
-      <div className="relative w-full max-w-lg mx-auto bg-[#F2F2F7] dark:bg-[#000000] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl transition-all">
+      <div className="relative w-full max-w-lg mx-auto bg-[#F5F6F8] dark:bg-[#0B1220] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl transition-all">
         {/* iOS Pull handle */}
         <div className="w-full flex justify-center pt-3 pb-1">
           <div className="w-10 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
@@ -118,7 +118,7 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
             >
               <Heart
                 className={`w-4 h-4 transition-colors ${
-                  recipe.isFavorite ? 'fill-[#FF3B30] text-[#FF3B30]' : 'text-neutral-700 dark:text-neutral-200'
+                  recipe.isFavorite ? 'fill-[#FACC15] text-[#FACC15]' : 'text-neutral-700 dark:text-neutral-200'
                 }`}
               />
             </button>
@@ -369,7 +369,7 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
             <div className="space-y-4">
               {recipe.steps.map((step) => (
                 <div key={step.stepNumber} className="flex gap-3.5">
-                  <div className="w-7 h-7 rounded-full bg-[#FF3B30]/10 text-[#FF3B30] dark:text-[#FF453A] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-full bg-[#1E3A8A]/10 text-[#1E3A8A] dark:text-[#5B8DEF] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                     {step.stepNumber}
                   </div>
                   <div className="flex-1">
@@ -407,7 +407,7 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
               haptics.tap();
               onStartCooking(recipe, servings);
             }}
-            className="w-full py-4 px-6 rounded-2xl bg-[#FF3B30] hover:bg-[#E0352B] active:scale-[0.98] text-white font-bold text-base shadow-lg shadow-[#FF3B30]/30 flex items-center justify-center gap-2 transition"
+            className="w-full py-4 px-6 rounded-2xl bg-[#1E3A8A] hover:bg-[#16306E] active:scale-[0.98] text-white font-bold text-base shadow-lg shadow-[#1E3A8A]/30 flex items-center justify-center gap-2 transition"
           >
             <ChefHat className="w-5 h-5" />
             <span>Start Cooking ({recipe.steps.length} Steps)</span>

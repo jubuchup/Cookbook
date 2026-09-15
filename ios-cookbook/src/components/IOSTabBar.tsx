@@ -1,19 +1,17 @@
 import React from 'react';
-import { BookOpen, Heart, Clock, UtensilsCrossed, Plus } from 'lucide-react';
+import { BookOpen, UtensilsCrossed, Plus } from 'lucide-react';
 import { haptics } from '../hooks/useHaptics';
 
-export type TabType = 'cookbook' | 'favorites' | 'quick' | 'fridge' | 'add';
+export type TabType = 'cookbook' | 'fridge' | 'add';
 
 interface IOSTabBarProps {
   currentTab: TabType;
   onSelectTab: (tab: TabType) => void;
-  favoritesCount: number;
 }
 
 export const IOSTabBar: React.FC<IOSTabBarProps> = ({
   currentTab,
   onSelectTab,
-  favoritesCount,
 }) => {
   const handleTabClick = (tab: TabType) => {
     haptics.tap();
@@ -22,8 +20,6 @@ export const IOSTabBar: React.FC<IOSTabBarProps> = ({
 
   const tabs: { id: TabType; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
     { id: 'cookbook', label: 'Cookbook', icon: BookOpen },
-    { id: 'favorites', label: 'Favorites', icon: Heart },
-    { id: 'quick', label: 'Under 20m', icon: Clock },
     { id: 'fridge', label: 'Pantry', icon: UtensilsCrossed },
     { id: 'add', label: 'Add Recipe', icon: Plus },
   ];
@@ -41,7 +37,7 @@ export const IOSTabBar: React.FC<IOSTabBarProps> = ({
               onClick={() => handleTabClick(tab.id)}
               className={`flex flex-col items-center justify-center flex-1 py-1 relative transition-all active:scale-90 ${
                 isActive
-                  ? 'text-[#FF3B30] dark:text-[#FF453A]'
+                  ? 'text-[#1E3A8A] dark:text-[#5B8DEF]'
                   : 'text-[#8E8E93] dark:text-[#98989D] hover:text-[#1C1C1E] dark:hover:text-[#F2F2F7]'
               }`}
             >
@@ -51,11 +47,6 @@ export const IOSTabBar: React.FC<IOSTabBarProps> = ({
                     isActive ? 'stroke-[2.5px] scale-105' : 'stroke-[1.8px]'
                   }`}
                 />
-                {tab.id === 'favorites' && favoritesCount > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-[#FF3B30] text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
-                    {favoritesCount}
-                  </span>
-                )}
               </div>
               <span className={`text-[10.5px] tracking-tight mt-0.5 ${isActive ? 'font-semibold' : 'font-medium'}`}>
                 {tab.label}

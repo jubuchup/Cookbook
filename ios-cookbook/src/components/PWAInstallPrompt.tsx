@@ -23,9 +23,9 @@ export const PWAInstallPrompt: React.FC = () => {
 
   return (
     <>
-      <div className="mx-4 mb-3 p-3 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-[#1C1C1E] dark:to-neutral-900 text-white rounded-2xl flex items-center justify-between shadow-sm border border-neutral-700/40">
+      <div className="md:hidden mx-4 mb-3 p-3 bg-gradient-to-r from-neutral-900 to-neutral-800 dark:from-[#1C1C1E] dark:to-neutral-900 text-white rounded-2xl flex items-center justify-between shadow-sm border border-neutral-700/40">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#FF3B30] flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 rounded-xl bg-[#1E3A8A] flex items-center justify-center shrink-0">
             <Download className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -54,7 +54,7 @@ export const PWAInstallPrompt: React.FC = () => {
       {showIOSGuide && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-5 backdrop-blur-xs animate-in fade-in duration-200">
           <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl dark:bg-[#1C1C1E] border border-black/10 dark:border-white/10 text-center space-y-4">
-            <div className="w-12 h-12 bg-[#FF3B30]/10 text-[#FF3B30] rounded-2xl mx-auto flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#1E3A8A]/10 text-[#1E3A8A] rounded-2xl mx-auto flex items-center justify-center">
               <Share className="w-6 h-6" />
             </div>
 

@@ -55,7 +55,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
           >
             <Heart
               className={`w-4 h-4 transition-colors ${
-                recipe.isFavorite ? 'fill-[#FF3B30] text-[#FF3B30]' : 'text-white'
+                recipe.isFavorite ? 'fill-[#FACC15] text-[#FACC15]' : 'text-white'
               }`}
             />
           </button>
@@ -110,7 +110,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({
             </div>
           </div>
 
-          <span className="text-[11px] font-medium text-[#FF3B30] dark:text-[#FF453A]">
+          <span className="text-[11px] font-medium text-[#1E3A8A] dark:text-[#5B8DEF]">
             {recipe.ingredients.length} ingr.
           </span>
         </div>

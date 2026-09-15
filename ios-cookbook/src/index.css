@@ -2,20 +2,24 @@
 
 @layer base {
   :root {
-    --ios-bg: #F2F2F7;
+    --ios-bg: #F5F6F8;
     --ios-card: #FFFFFF;
     --ios-text: #1C1C1E;
     --ios-subtext: #8E8E93;
-    --ios-accent: #FF3B30; /* iOS Warm Coral/Red for Cookbook */
+    --ios-accent: #1E3A8A; /* Dark blue primary accent */
+    --ios-accent-2: #FACC15; /* Bright yellow secondary accent */
+    --ios-accent-3: #3B6FD9; /* Mid blue tertiary accent */
     --ios-separator: rgba(60, 60, 67, 0.12);
   }
 
   .dark {
-    --ios-bg: #000000;
+    --ios-bg: #0B1220;
     --ios-card: #1C1C1E;
     --ios-text: #F2F2F7;
     --ios-subtext: #98989D;
-    --ios-accent: #FF453A;
+    --ios-accent: #5B8DEF;
+    --ios-accent-2: #FACC15;
+    --ios-accent-3: #3B6FD9;
     --ios-separator: rgba(84, 84, 88, 0.35);
   }
 
