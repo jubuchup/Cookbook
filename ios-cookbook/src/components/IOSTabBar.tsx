@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, UtensilsCrossed, Plus } from 'lucide-react';
+import { BookOpen, UtensilsCrossed } from 'lucide-react';
 import { haptics } from '../hooks/useHaptics';
 
 export type TabType = 'cookbook' | 'fridge' | 'add';
@@ -21,7 +21,6 @@ export const IOSTabBar: React.FC<IOSTabBarProps> = ({
   const tabs: { id: TabType; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
     { id: 'cookbook', label: 'Cookbook', icon: BookOpen },
     { id: 'fridge', label: 'Pantry', icon: UtensilsCrossed },
-    { id: 'add', label: 'Add Recipe', icon: Plus },
   ];
 
   return (

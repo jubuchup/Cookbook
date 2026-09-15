@@ -28,7 +28,6 @@ export default function App() {
   const [cookingState, setCookingState] = useState<{ recipe: Recipe; servings: number } | null>(null);
   const [showFilterSheet, setShowFilterSheet] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // Filters state
   const [filters, setFilters] = useState<FilterState>({
@@ -56,15 +55,6 @@ export default function App() {
   useEffect(() => {
     loadRecipes();
   }, []);
-
-  // Handle dark mode toggle
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
 
   // Handle Tab changes
   const handleSelectTab = (tab: TabType) => {
@@ -192,8 +182,6 @@ export default function App() {
       <Sidebar
         currentTab={currentTab}
         onSelectTab={handleSelectTab}
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
         onAddRecipe={() => setShowAddModal(true)}
       />
 

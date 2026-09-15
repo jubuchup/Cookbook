@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Force dark: variants to only ever apply inside an explicit .dark class
+   (which this app never adds), instead of following the OS/browser
+   prefers-color-scheme media query. The app is light-mode only. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --ios-bg: #F5F6F8;
