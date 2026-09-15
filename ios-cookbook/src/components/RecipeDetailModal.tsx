@@ -83,13 +83,8 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
 
       {/* Main Sheet */}
       <div className="relative w-full max-w-lg mx-auto bg-[#F5F6F8] dark:bg-[#0B1220] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl transition-all">
-        {/* iOS Pull handle */}
-        <div className="w-full flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-        </div>
-
         {/* Header Bar */}
-        <div className="flex items-center justify-between px-5 py-2 z-10">
+        <div className="flex items-center justify-between px-5 pt-4 pb-2 z-10">
           <button
             id="close-recipe-modal-btn"
             onClick={onClose}

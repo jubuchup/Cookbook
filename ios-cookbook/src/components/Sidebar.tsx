@@ -1,13 +1,11 @@
 import React from 'react';
-import { BookOpen, UtensilsCrossed, Plus, Moon, Sun, ChefHat } from 'lucide-react';
+import { BookOpen, UtensilsCrossed, Plus, ChefHat } from 'lucide-react';
 import { haptics } from '../hooks/useHaptics';
 import { TabType } from './IOSTabBar';
 
 interface SidebarProps {
   currentTab: TabType;
   onSelectTab: (tab: TabType) => void;
-  isDarkMode: boolean;
-  onToggleDarkMode: () => void;
   onAddRecipe: () => void;
 }
 
@@ -19,8 +17,6 @@ const navItems: { id: TabType; label: string; icon: React.ComponentType<{ classN
 export const Sidebar: React.FC<SidebarProps> = ({
   currentTab,
   onSelectTab,
-  isDarkMode,
-  onToggleDarkMode,
   onAddRecipe,
 }) => {
   return (
@@ -74,20 +70,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           );
         })}
       </nav>
-
-      {/* Footer: dark mode toggle */}
-      <div className="px-4 py-5 border-t border-black/[0.06] dark:border-white/[0.08]">
-        <button
-          onClick={() => {
-            haptics.tap();
-            onToggleDarkMode();
-          }}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 transition"
-        >
-          {isDarkMode ? <Sun className="w-4.5 h-4.5 text-amber-400" /> : <Moon className="w-4.5 h-4.5" />}
-          {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-        </button>
-      </div>
     </aside>
   );
 };
