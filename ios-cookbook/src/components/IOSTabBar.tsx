@@ -29,7 +29,7 @@ export const IOSTabBar: React.FC<IOSTabBarProps> = ({
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-2xl bg-white/85 dark:bg-[#1c1c1e]/85 border-t border-black/[0.08] dark:border-white/[0.12] transition-colors max-w-lg mx-auto">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 backdrop-blur-2xl bg-white/85 dark:bg-[#1c1c1e]/85 border-t border-black/[0.08] dark:border-white/[0.12] transition-colors">
       <div className="flex items-center justify-around pt-1.5 pb-1 px-3">
         {tabs.map((tab) => {
           const Icon = tab.icon;

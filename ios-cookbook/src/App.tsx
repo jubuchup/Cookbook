@@ -5,21 +5,13 @@ import {
   Plus,
   BookOpen,
   Heart,
-  Clock,
-  Sparkles,
   RefreshCw,
-  Smartphone,
-  Maximize2,
   X,
-  Flame,
-  Check,
-  Moon,
-  Sun
 } from 'lucide-react';
 import { Recipe, FilterState, MealType } from './types';
 import { fetchRecipes, createRecipe, updateRecipe, toggleFavorite, deleteRecipe } from './services/recipeApi';
-import { IOSStatusBar } from './components/IOSStatusBar';
 import { IOSTabBar, TabType } from './components/IOSTabBar';
+import { Sidebar } from './components/Sidebar';
 import { RecipeCard } from './components/RecipeCard';
 import { RecipeDetailModal } from './components/RecipeDetailModal';
 import { CookingModeModal } from './components/CookingModeModal';
@@ -38,9 +30,6 @@ export default function App() {
   const [showFilterSheet, setShowFilterSheet] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Desktop iPhone frame mode toggle (auto-enable on desktop wider screens)
-  const [isDeviceFrame, setIsDeviceFrame] = useState(true);
 
   // Filters state
   const [filters, setFilters] = useState<FilterState>({
@@ -209,55 +198,22 @@ export default function App() {
   const mealTypes: (MealType | 'All')[] = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Snack', 'Dessert'];
 
   return (
-    <div className="min-h-screen bg-neutral-200 dark:bg-neutral-950 flex flex-col items-center justify-center sm:p-4 font-sans select-none antialiased">
-      {/* Top Desktop Controls Bar (Frame Mode / Dark Mode / Reload) */}
-      <div className="hidden sm:flex items-center justify-between w-full max-w-lg mb-3 px-2 text-xs text-neutral-600 dark:text-neutral-400">
-        <div className="flex items-center gap-1 font-semibold text-neutral-800 dark:text-neutral-200">
-          <Smartphone className="w-4 h-4 text-[#FF3B30]" />
-          <span>iOS iPhone Experience</span>
-        </div>
+    <div className="min-h-screen bg-[#F2F2F7] dark:bg-[#000000] font-sans antialiased md:flex">
+      {/* Desktop Sidebar Navigation */}
+      <Sidebar
+        currentTab={currentTab}
+        onSelectTab={handleSelectTab}
+        favoritesCount={favoritesCount}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
+        onAddRecipe={() => setShowAddModal(true)}
+      />
 
-        <div className="flex items-center gap-2">
-          <button
-            id="toggle-dark-mode-btn"
-            onClick={() => {
-              haptics.tap();
-              setIsDarkMode((prev) => !prev);
-            }}
-            className="p-1.5 rounded-full bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 shadow-xs"
-            title="Toggle Dark Mode"
-          >
-            {isDarkMode ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5 text-neutral-600" />}
-          </button>
-
-          <button
-            id="toggle-frame-mode-btn"
-            onClick={() => {
-              haptics.tap();
-              setIsDeviceFrame((prev) => !prev);
-            }}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 shadow-xs font-medium"
-          >
-            <Maximize2 className="w-3 h-3" />
-            <span>{isDeviceFrame ? 'Full Width' : 'Phone Frame'}</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main iPhone Screen Container */}
-      <div
-        className={`w-full relative transition-all duration-300 flex flex-col ${
-          isDeviceFrame
-            ? 'max-w-[420px] h-[890px] rounded-[52px] shadow-[0_25px_70px_rgba(0,0,0,0.35)] border-[10px] border-[#1C1C1E] dark:border-[#2C2C2E] overflow-hidden bg-[#F2F2F7] dark:bg-[#000000]'
-            : 'max-w-2xl min-h-screen bg-[#F2F2F7] dark:bg-[#000000] shadow-md'
-        }`}
-      >
-        {/* iOS Native Status Bar */}
-        <IOSStatusBar isMockupFrame={isDeviceFrame} />
-
+      {/* Main Content Column */}
+      <div className="flex-1 min-h-screen flex flex-col md:max-w-4xl md:mx-auto md:w-full">
         {/* Top App Header */}
-        <div className="px-5 pt-3 pb-2 flex items-center justify-between">
-          <div>
+        <div className="px-5 md:px-8 pt-6 pb-3 flex items-center justify-between">
+          <div className="md:hidden">
             <span className="text-[11px] font-bold uppercase tracking-wider text-[#FF3B30] dark:text-[#FF453A]">
               Personal Kitchen
             </span>
@@ -271,8 +227,17 @@ export default function App() {
                 : 'Pantry Chef'}
             </h1>
           </div>
+          <h2 className="hidden md:block text-xl font-bold text-[#1C1C1E] dark:text-[#F2F2F7]">
+            {currentTab === 'cookbook'
+              ? 'All Recipes'
+              : currentTab === 'favorites'
+              ? 'Favorites'
+              : currentTab === 'quick'
+              ? 'Under 20 Mins'
+              : 'Pantry Chef'}
+          </h2>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 md:hidden">
             <button
               id="open-add-recipe-top-btn"
               onClick={() => {
@@ -292,7 +257,7 @@ export default function App() {
 
         {/* Search Bar & Filter Button (Only on regular tabs, not Fridge tab) */}
         {currentTab !== 'fridge' && (
-          <div className="px-5 pb-2.5 flex items-center gap-2">
+          <div className="px-5 md:px-8 pb-2.5 flex items-center gap-2">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-2.5 w-4 h-4 text-neutral-400" />
               <input
@@ -337,7 +302,7 @@ export default function App() {
 
         {/* Meal Type Quick Carousel (Segmented/Pills) */}
         {currentTab === 'cookbook' && (
-          <div className="px-5 pb-3">
+          <div className="px-5 md:px-8 pb-3">
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
               {mealTypes.map((mt) => {
                 const isSelected = filters.mealType === mt;
@@ -364,7 +329,7 @@ export default function App() {
 
         {/* Active Filters Pill Bar (if any filters active) */}
         {activeFiltersCount > 0 && (
-          <div className="px-5 pb-2 flex items-center justify-between text-xs text-[#FF3B30] font-medium">
+          <div className="px-5 md:px-8 pb-2 flex items-center justify-between text-xs text-[#FF3B30] font-medium">
             <span>
               {filteredRecipes.length} of {recipes.length} recipes matched
             </span>
@@ -389,7 +354,7 @@ export default function App() {
         )}
 
         {/* Main Scroll Area */}
-        <div className="flex-1 overflow-y-auto ios-scroll px-5 pb-28 pt-1">
+        <div className="flex-1 overflow-y-auto ios-scroll px-5 md:px-8 pb-28 md:pb-10 pt-1">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 text-neutral-400 space-y-3">
               <RefreshCw className="w-6 h-6 animate-spin text-[#FF3B30]" />
@@ -405,7 +370,7 @@ export default function App() {
             />
           ) : filteredRecipes.length > 0 ? (
             /* Recipes Grid */
-            <div className="space-y-4">
+            <div className="space-y-4 md:grid md:grid-cols-2 md:gap-4 md:space-y-0 lg:grid-cols-3">
               {filteredRecipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
