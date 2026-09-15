@@ -1,41 +1,59 @@
 # Cookbook
 
-Personal recipe/macro tracker. Google Sheet is the source of truth; a manual
-GitHub Action syncs it into a DuckDB file, and a static GitHub Pages site
-queries that file live in-browser via duckdb-wasm.
+Personal recipe/food-tracking app, used by a handful of people to view,
+create, and edit recipes. It's a PWA — installable via "Add to Home
+Screen" on iOS Safari (not an App Store app) — that also works as a normal
+desktop web app.
 
-**Live site:** https://jubuchup.github.io/Cookbook/
+**Live app:** deployed via Cloudflare Pages (see `ios-cookbook/`).
 
-## Structure
+## Current architecture
 
-- `scripts/sync.py` — fetches the Recipes + Ingredients tabs (published as
-  CSV) and rebuilds `data/tracker.duckdb`.
-- `data/tracker.duckdb` — the built database, committed via PR.
-- `site/index.html` — the Pages site (recipe list + detail views), loads
-  `@duckdb/duckdb-wasm` from a CDN and queries the DuckDB file client-side.
-- `.github/workflows/sync.yml` — manual (`workflow_dispatch`) trigger, runs
-  `sync.py`, opens a PR with the updated `data/tracker.duckdb`.
-- `.github/workflows/deploy.yml` — runs on every push to `main`, deploys
-  `site/` (plus a copy of `data/tracker.duckdb`) to GitHub Pages.
+- **Frontend:** `ios-cookbook/` — a Vite + React + Tailwind SPA (iOS-style
+  UI: recipe cards, filters, favorites, a "what's in my fridge" ingredient
+  matcher, and a step-by-step cooking mode with timers).
+- **Database:** Supabase (Postgres) project "Cookbook". The `recipes` table
+  is queried and written directly from the browser using the public
+  anon/publishable key — there's no backend/API layer in this phase. See
+  `docs/supabase-schema-migration.sql` for the schema.
+- **Hosting:** Cloudflare Pages, connected to this repo, deploying
+  automatically on push to `main`. Build settings: root directory
+  `ios-cookbook`, build command `npm run build`, output directory `dist`.
+- **Recipe entry:** stays AI-assisted but manual on purpose — paste a
+  recipe (or its URL) into a free chat AI (ChatGPT/Claude web app) using
+  the prompt template built into the app's "Paste from AI Chat" tab, which
+  returns structured JSON; paste that JSON back into the app to create the
+  recipe. No AI API key is used by the app itself — see
+  `docs/cookbook-app-handoff.md`-derived notes below for why.
+
+**Current phase: intentionally simple, no-auth testing setup.** The app is
+fully public — anyone with the URL can read and write all recipes. Google
+login and per-recipe private/shared visibility are planned but deferred
+until this testing phase works end-to-end.
+
+## Repo structure
+
+- `ios-cookbook/` — the app (current, active).
+- `docs/supabase-schema-migration.sql` — one-time SQL to extend the
+  Supabase `recipes` table with the columns the app needs (run once in the
+  Supabase SQL editor).
+- `docs/design-spec.md`, `docs/github-setup.md` — earlier design/setup
+  notes, kept for reference.
+- `docs/motherduck-migration-spec.md` — an earlier, now-superseded plan to
+  migrate to MotherDuck + Cloudflare Worker. Superseded by the
+  Supabase-based approach above; kept only for historical context.
+- `site/`, `scripts/sync.py`, `data/tracker.duckdb`,
+  `.github/workflows/sync.yml`, `.github/workflows/deploy.yml` — the
+  original read-only Google Sheet → DuckDB → GitHub Pages setup. No longer
+  the active app; left in place but not maintained. Safe to remove once
+  the Supabase/Cloudflare Pages setup is confirmed working end-to-end.
 
 ## Updating recipes
 
-1. Edit the Google Sheet.
-2. In GitHub → Actions → "Sync Google Sheet to DuckDB" → Run workflow.
-3. Review and merge the PR it opens.
-4. Merging triggers the Pages deploy automatically — the live site updates
-   within a minute or two.
+1. Open the app, tap "+", then "Paste from AI Chat".
+2. Copy the built-in prompt template, paste it (plus a recipe or a link to
+   one) into ChatGPT, Claude, or another free chat app.
+3. Copy the JSON the chat gives back, paste it into the app, and tap
+   "Create Recipe from Pasted JSON".
 
-See `docs/github-setup.md` for one-time repo setup (Pages source, Actions
-permissions, publish-to-web links).
-
-### Optional sheet columns
-
-`scripts/sync.py` also picks up two optional columns on the Recipes tab, if
-present:
-
-- `Vegetarian` — `TRUE`/`FALSE`. Shows a green leaf badge on the recipe card.
-- `ImageURL` — a public image URL. Shown on the recipe card and detail view.
-
-Both are optional; older sheet exports without them still sync fine.
-
+Or use "Manual Entry" to fill out the form directly.

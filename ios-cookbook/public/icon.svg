@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="cookbookGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF5E3A"/>
+      <stop offset="100%" stop-color="#FF2A68"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#cookbookGrad)"/>
+  <!-- Chef Hat / Book Motif -->
+  <g filter="url(#shadow)" fill="#FFFFFF">
+    <path d="M256 120 C220 120 200 145 195 165 C170 165 145 185 145 215 C145 240 162 258 185 264 L185 300 L327 300 L327 264 C350 258 367 240 367 215 C367 185 342 165 317 165 C312 145 292 120 256 120 Z"/>
+    <rect x="180" y="315" width="152" height="24" rx="6"/>
+    <!-- Knife & Fork Crossed or Book Base -->
+    <path d="M160 360 C160 350 170 345 180 345 L332 345 C342 345 352 350 352 360 L360 400 C360 410 350 416 340 416 L172 416 C162 416 152 410 152 400 Z" opacity="0.95"/>
+    <rect x="250" y="345" width="12" height="71" fill="#FF3366" opacity="0.8"/>
+  </g>
+</svg>

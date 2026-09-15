@@ -1,0 +1,577 @@
+[
+  {
+    "id": "recipe-1",
+    "title": "Tuscan Garlic Butter Salmon",
+    "description": "Pan-seared Atlantic salmon fillets resting in a velvety sun-dried tomato, spinach, and garlic cream sauce.",
+    "imageUrl": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 10,
+    "cookTimeMinutes": 15,
+    "servings": 2,
+    "mealType": "Dinner",
+    "difficulty": "Easy",
+    "calories": 485,
+    "macros": {
+      "protein": 38,
+      "carbs": 8,
+      "fat": 32,
+      "fiber": 2
+    },
+    "ingredients": [
+      { "id": "i1-1", "name": "Salmon Fillets", "amount": 2, "unit": "fillets", "category": "Seafood" },
+      { "id": "i1-2", "name": "Garlic", "amount": 4, "unit": "cloves", "category": "Produce", "notes": "minced" },
+      { "id": "i1-3", "name": "Baby Spinach", "amount": 100, "unit": "g", "category": "Produce" },
+      { "id": "i1-4", "name": "Sun-Dried Tomatoes", "amount": 50, "unit": "g", "category": "Pantry & Grains", "notes": "drained & chopped" },
+      { "id": "i1-5", "name": "Heavy Cream", "amount": 120, "unit": "ml", "category": "Dairy & Eggs" },
+      { "id": "i1-6", "name": "Parmesan Cheese", "amount": 40, "unit": "g", "category": "Dairy & Eggs", "notes": "grated" },
+      { "id": "i1-7", "name": "Olive Oil", "amount": 1, "unit": "tbsp", "category": "Spices & Oils" },
+      { "id": "i1-8", "name": "Unsalted Butter", "amount": 1, "unit": "tbsp", "category": "Dairy & Eggs" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Season Salmon",
+        "instruction": "Pat salmon fillets thoroughly dry with paper towels. Season both sides generously with salt, cracked black pepper, and paprika.",
+        "durationMinutes": 3,
+        "tip": "Dry skin creates a crispier sear in the hot pan."
+      },
+      {
+        "stepNumber": 2,
+        "title": "Pan Sear",
+        "instruction": "Heat olive oil and butter in a large skillet over medium-high heat. Add salmon fillets skin-side down and sear for 5 minutes until crisp and golden, then flip and cook for another 3-4 minutes. Transfer salmon to a warm plate.",
+        "durationMinutes": 8,
+        "tip": "Don't move the salmon during the first 4 minutes to ensure a golden crust."
+      },
+      {
+        "stepNumber": 3,
+        "title": "Make Tuscan Cream Sauce",
+        "instruction": "In the same skillet, sauté minced garlic for 1 minute until fragrant. Add sun-dried tomatoes and cook for 1 minute. Pour in heavy cream and chicken broth, bringing to a gentle simmer for 3 minutes.",
+        "durationMinutes": 4
+      },
+      {
+        "stepNumber": 4,
+        "title": "Fold Spinach & Finish",
+        "instruction": "Stir in grated parmesan until melted and creamy. Add fresh baby spinach and allow to wilt gently. Return salmon fillets to the skillet, spooning sauce over each piece.",
+        "durationMinutes": 3,
+        "tip": "Serve immediately with lemon wedges and crusty bread or wild rice."
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["High Protein", "Keto", "Quick", "Gluten-Free"],
+    "createdAt": "2026-09-01T12:00:00.000Z"
+  },
+  {
+    "id": "recipe-2",
+    "title": "Crispy Lemon Herb Chicken Quinoa Bowl",
+    "description": "Marinated grilled chicken breast served over fluffy herbed quinoa, crisp Persian cucumbers, kalamata olives, and feta drizzle.",
+    "imageUrl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 20,
+    "servings": 2,
+    "mealType": "Lunch",
+    "difficulty": "Easy",
+    "calories": 520,
+    "macros": {
+      "protein": 44,
+      "carbs": 42,
+      "fat": 18,
+      "fiber": 6
+    },
+    "ingredients": [
+      { "id": "i2-1", "name": "Chicken Breast", "amount": 350, "unit": "g", "category": "Meat & Poultry" },
+      { "id": "i2-2", "name": "Quinoa", "amount": 120, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i2-3", "name": "Persian Cucumber", "amount": 2, "unit": "pieces", "category": "Produce", "notes": "diced" },
+      { "id": "i2-4", "name": "Cherry Tomatoes", "amount": 150, "unit": "g", "category": "Produce", "notes": "halved" },
+      { "id": "i2-5", "name": "Kalamata Olives", "amount": 40, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i2-6", "name": "Feta Cheese", "amount": 50, "unit": "g", "category": "Dairy & Eggs", "notes": "crumbled" },
+      { "id": "i2-7", "name": "Lemon Juice", "amount": 2, "unit": "tbsp", "category": "Produce" },
+      { "id": "i2-8", "name": "Extra Virgin Olive Oil", "amount": 2, "unit": "tbsp", "category": "Spices & Oils" },
+      { "id": "i2-9", "name": "Dried Oregano", "amount": 1, "unit": "tsp", "category": "Spices & Oils" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Cook Quinoa",
+        "instruction": "Rinse quinoa in a fine-mesh strainer. Combine with 240ml water and a pinch of salt in a saucepan. Bring to a boil, cover, and reduce heat to low for 15 minutes until liquid is absorbed.",
+        "durationMinutes": 15,
+        "tip": "Let quinoa rest off the heat covered for 5 minutes before fluffing with a fork."
+      },
+      {
+        "stepNumber": 2,
+        "title": "Marinate Chicken",
+        "instruction": "Toss chicken breast with 1 tbsp olive oil, 1 tbsp lemon juice, oregano, salt, and black pepper. Let sit for 5-10 minutes.",
+        "durationMinutes": 5
+      },
+      {
+        "stepNumber": 3,
+        "title": "Grill Chicken",
+        "instruction": "Heat a grill pan or cast iron skillet over medium-high heat. Cook chicken for 6-7 minutes per side until internal temperature reaches 74°C (165°F). Rest 5 minutes, then slice diagonally.",
+        "durationMinutes": 14,
+        "tip": "Resting chicken preserves juiciness."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Assemble Bowls",
+        "instruction": "Divide fluffy quinoa into two shallow bowls. Arrange sliced chicken, cucumbers, cherry tomatoes, and kalamata olives. Top with crumbled feta and drizzle with remaining lemon vinaigrette.",
+        "durationMinutes": 3
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["High Protein", "Meal Prep", "Mediterranean", "Balanced"],
+    "createdAt": "2026-09-02T10:30:00.000Z"
+  },
+  {
+    "id": "recipe-3",
+    "title": "Avocado & Poached Egg Sourdough",
+    "description": "Artisan toasted sourdough smeared with lemon garlic mashed avocado, topped with two runny poached eggs, chili flakes, and microgreens.",
+    "imageUrl": "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 10,
+    "cookTimeMinutes": 6,
+    "servings": 1,
+    "mealType": "Breakfast",
+    "difficulty": "Medium",
+    "calories": 420,
+    "macros": {
+      "protein": 18,
+      "carbs": 34,
+      "fat": 24,
+      "fiber": 8
+    },
+    "ingredients": [
+      { "id": "i3-1", "name": "Sourdough Bread", "amount": 2, "unit": "slices", "category": "Pantry & Grains" },
+      { "id": "i3-2", "name": "Eggs", "amount": 2, "unit": "pieces", "category": "Dairy & Eggs", "notes": "fresh pasture-raised" },
+      { "id": "i3-3", "name": "Ripe Avocado", "amount": 1, "unit": "pieces", "category": "Produce" },
+      { "id": "i3-4", "name": "Lemon Juice", "amount": 1, "unit": "tsp", "category": "Produce" },
+      { "id": "i3-5", "name": "Red Pepper Flakes", "amount": 0.5, "unit": "tsp", "category": "Spices & Oils" },
+      { "id": "i3-6", "name": "Flaky Sea Salt", "amount": 0.5, "unit": "tsp", "category": "Spices & Oils" },
+      { "id": "i3-7", "name": "White Vinegar", "amount": 1, "unit": "tbsp", "category": "Pantry & Grains", "notes": "for poaching" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Mash Avocado",
+        "instruction": "Scoop avocado into a bowl with fresh lemon juice, a pinch of flaky sea salt, and black pepper. Mash with a fork leaving slight texture.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 2,
+        "title": "Toast Bread",
+        "instruction": "Toast sourdough slices until golden and crisp. Optionally brush lightly with extra virgin olive oil.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 3,
+        "title": "Poach Eggs",
+        "instruction": "Bring a shallow pot of water with 1 tbsp vinegar to a bare simmer. Create a gentle whirlpool with a spoon, slide in cracked eggs one at a time, and cook for 3 minutes for a luscious runny yolk.",
+        "durationMinutes": 4,
+        "tip": "Very fresh eggs hold their shape much better in the poaching vortex."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Assemble & Garnish",
+        "instruction": "Spread avocado generously across both toasts. Lift eggs with a slotted spoon, dry gently on paper towel, and place atop avocado. Sprinkle with chili flakes, flaky salt, and cracked pepper.",
+        "durationMinutes": 2
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["Vegetarian", "Quick", "Superfood", "Breakfast"],
+    "createdAt": "2026-09-03T08:00:00.000Z"
+  },
+  {
+    "id": "recipe-4",
+    "title": "Authentic Beef Bolognese Pappardelle",
+    "description": "Slow-simmered rich Italian ragù with minced beef, sofrito, crushed San Marzano tomatoes, and whole milk tossed with wide pappardelle ribbons.",
+    "imageUrl": "https://images.unsplash.com/photo-1621996346565-e3d5d6281691?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 45,
+    "servings": 4,
+    "mealType": "Dinner",
+    "difficulty": "Medium",
+    "calories": 640,
+    "macros": {
+      "protein": 42,
+      "carbs": 68,
+      "fat": 22,
+      "fiber": 5
+    },
+    "ingredients": [
+      { "id": "i4-1", "name": "Pappardelle Pasta", "amount": 350, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i4-2", "name": "Lean Ground Beef (85/15)", "amount": 450, "unit": "g", "category": "Meat & Poultry" },
+      { "id": "i4-3", "name": "Yellow Onion", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "finely diced" },
+      { "id": "i4-4", "name": "Carrots", "amount": 2, "unit": "pieces", "category": "Produce", "notes": "finely diced" },
+      { "id": "i4-5", "name": "Celery Stalk", "amount": 2, "unit": "pieces", "category": "Produce", "notes": "finely diced" },
+      { "id": "i4-6", "name": "Garlic", "amount": 3, "unit": "cloves", "category": "Produce" },
+      { "id": "i4-7", "name": "Tomato Paste", "amount": 2, "unit": "tbsp", "category": "Pantry & Grains" },
+      { "id": "i4-8", "name": "Canned San Marzano Tomatoes", "amount": 400, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i4-9", "name": "Whole Milk", "amount": 100, "unit": "ml", "category": "Dairy & Eggs" },
+      { "id": "i4-10", "name": "Parmigiano-Reggiano", "amount": 50, "unit": "g", "category": "Dairy & Eggs" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Sauté Sofrito",
+        "instruction": "In a heavy-bottomed Dutch oven, heat olive oil over medium. Add onion, celery, and carrot with a pinch of salt. Cook gently for 8-10 minutes until soft and translucent.",
+        "durationMinutes": 10
+      },
+      {
+        "stepNumber": 2,
+        "title": "Brown Beef",
+        "instruction": "Push vegetables to side and add ground beef. Break up meat with a wooden spoon and brown deeply for 6-8 minutes until caramelized.",
+        "durationMinutes": 8
+      },
+      {
+        "stepNumber": 3,
+        "title": "Simmer Sauce",
+        "instruction": "Stir in tomato paste and cook 2 minutes. Pour in milk and let simmer until absorbed. Add crushed tomatoes, reduce heat to low, cover partially and simmer for 30 minutes.",
+        "durationMinutes": 32,
+        "tip": "Milk tenderizes the meat fibres creating traditional silky bolognese texture."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Cook Pasta & Toss",
+        "instruction": "Boil pappardelle in salted water until al dente (about 8 mins). Reserve 1/2 cup pasta water. Toss hot pasta directly into the ragù, adding pasta water as needed. Garnish with fresh parmigiano.",
+        "durationMinutes": 10
+      }
+    ],
+    "isFavorite": false,
+    "tags": ["Comfort Food", "Italian", "Hearty", "Pasta"],
+    "createdAt": "2026-09-04T18:00:00.000Z"
+  },
+  {
+    "id": "recipe-5",
+    "title": "Berry Blast Greek Yogurt Parfait",
+    "description": "Creamy high-protein vanilla Greek yogurt layered with wild blueberry chia compote, crunchy pecan granola, and raw honey.",
+    "imageUrl": "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 8,
+    "cookTimeMinutes": 0,
+    "servings": 1,
+    "mealType": "Breakfast",
+    "difficulty": "Easy",
+    "calories": 310,
+    "macros": {
+      "protein": 24,
+      "carbs": 38,
+      "fat": 7,
+      "fiber": 5
+    },
+    "ingredients": [
+      { "id": "i5-1", "name": "0% Plain Greek Yogurt", "amount": 200, "unit": "g", "category": "Dairy & Eggs" },
+      { "id": "i5-2", "name": "Fresh Blueberries", "amount": 60, "unit": "g", "category": "Produce" },
+      { "id": "i5-3", "name": "Fresh Raspberries", "amount": 50, "unit": "g", "category": "Produce" },
+      { "id": "i5-4", "name": "Pecan Granola", "amount": 35, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i5-5", "name": "Chia Seeds", "amount": 1, "unit": "tsp", "category": "Pantry & Grains" },
+      { "id": "i5-6", "name": "Raw Honey", "amount": 1, "unit": "tbsp", "category": "Pantry & Grains" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Layer Yogurt Base",
+        "instruction": "Spoon half of the thick Greek yogurt into a clear glass or dessert cup.",
+        "durationMinutes": 2
+      },
+      {
+        "stepNumber": 2,
+        "title": "Add Berry Layer",
+        "instruction": "Layer fresh blueberries and raspberries, then sprinkle half of the chia seeds and granola.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 3,
+        "title": "Final Layer & Drizzle",
+        "instruction": "Top with the remaining Greek yogurt, remaining berries, crunchy granola, and drizzle with golden honey.",
+        "durationMinutes": 3,
+        "tip": "High in protein and gut-healthy probiotics to kickstart your morning."
+      }
+    ],
+    "isFavorite": false,
+    "tags": ["Quick", "High Protein", "Breakfast", "Snack", "No Cook"],
+    "createdAt": "2026-09-05T07:15:00.000Z"
+  },
+  {
+    "id": "recipe-6",
+    "title": "Thai Red Curry with Crispy Tofu",
+    "description": "Golden pan-fried tofu cubes immersed in an aromatic lemongrass and red curry coconut broth with bell peppers, bamboo shoots, and Thai basil.",
+    "imageUrl": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 15,
+    "servings": 2,
+    "mealType": "Dinner",
+    "difficulty": "Easy",
+    "calories": 440,
+    "macros": {
+      "protein": 19,
+      "carbs": 24,
+      "fat": 28,
+      "fiber": 5
+    },
+    "ingredients": [
+      { "id": "i6-1", "name": "Extra Firm Tofu", "amount": 300, "unit": "g", "category": "Produce", "notes": "pressed & cubed" },
+      { "id": "i6-2", "name": "Red Curry Paste", "amount": 2, "unit": "tbsp", "category": "Pantry & Grains" },
+      { "id": "i6-3", "name": "Coconut Milk", "amount": 400, "unit": "ml", "category": "Pantry & Grains" },
+      { "id": "i6-4", "name": "Red Bell Pepper", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "sliced" },
+      { "id": "i6-5", "name": "Zucchini", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "sliced" },
+      { "id": "i6-6", "name": "Soy Sauce", "amount": 1, "unit": "tbsp", "category": "Pantry & Grains" },
+      { "id": "i6-7", "name": "Brown Sugar", "amount": 1, "unit": "tsp", "category": "Pantry & Grains" },
+      { "id": "i6-8", "name": "Fresh Thai Basil", "amount": 15, "unit": "g", "category": "Produce" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Crisp the Tofu",
+        "instruction": "Toss pressed tofu cubes with 1 tsp cornstarch. Pan fry in 1 tbsp oil over medium-high heat for 6-8 minutes until golden and crispy on all sides. Set aside.",
+        "durationMinutes": 8,
+        "tip": "Pressing the tofu for 10 minutes beforehand guarantees maximum crispiness."
+      },
+      {
+        "stepNumber": 2,
+        "title": "Fry Curry Paste",
+        "instruction": "In the same pan, heat 1 tsp oil and fry the red curry paste for 1 minute until deeply fragrant and oil begins to separate.",
+        "durationMinutes": 2
+      },
+      {
+        "stepNumber": 3,
+        "title": "Simmer Coconut Broth",
+        "instruction": "Pour in creamy coconut milk, soy sauce, and brown sugar. Bring to a gentle boil, then add bell peppers and zucchini. Simmer for 5-6 minutes until vegetables are crisp-tender.",
+        "durationMinutes": 6
+      },
+      {
+        "stepNumber": 4,
+        "title": "Combine & Serve",
+        "instruction": "Stir in crisp tofu and fresh Thai basil leaves. Remove from heat immediately. Serve hot over jasmine rice.",
+        "durationMinutes": 2
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["Vegan", "Gluten-Free", "Thai", "Curry"],
+    "createdAt": "2026-09-06T19:00:00.000Z"
+  },
+  {
+    "id": "recipe-7",
+    "title": "Avocado Lime Shrimp Tacos",
+    "description": "Chili-cumin rubbed grilled jumbo shrimp nestled in warm corn tortillas with crunchy cilantro slaw, creamy avocado crema, and cotija cheese.",
+    "imageUrl": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 8,
+    "servings": 2,
+    "mealType": "Lunch",
+    "difficulty": "Easy",
+    "calories": 410,
+    "macros": {
+      "protein": 32,
+      "carbs": 38,
+      "fat": 14,
+      "fiber": 7
+    },
+    "ingredients": [
+      { "id": "i7-1", "name": "Raw Jumbo Shrimp", "amount": 300, "unit": "g", "category": "Seafood", "notes": "peeled & deveined" },
+      { "id": "i7-2", "name": "Small Corn Tortillas", "amount": 4, "unit": "pieces", "category": "Pantry & Grains" },
+      { "id": "i7-3", "name": "Shredded Purple Cabbage", "amount": 100, "unit": "g", "category": "Produce" },
+      { "id": "i7-4", "name": "Avocado", "amount": 1, "unit": "pieces", "category": "Produce" },
+      { "id": "i7-5", "name": "Lime", "amount": 2, "unit": "pieces", "category": "Produce" },
+      { "id": "i7-6", "name": "Cotija Cheese", "amount": 30, "unit": "g", "category": "Dairy & Eggs", "notes": "crumbled" },
+      { "id": "i7-7", "name": "Chili Powder", "amount": 1, "unit": "tsp", "category": "Spices & Oils" },
+      { "id": "i7-8", "name": "Ground Cumin", "amount": 0.5, "unit": "tsp", "category": "Spices & Oils" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Season Shrimp",
+        "instruction": "Toss shrimp in a bowl with chili powder, cumin, garlic powder, pinch of salt, and 1 tsp olive oil.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 2,
+        "title": "Make Slaw & Crema",
+        "instruction": "Toss shredded purple cabbage with juice of 1 lime and a pinch of salt. Mash avocado with lime juice, cilantro, and a spoonful of Greek yogurt or sour cream.",
+        "durationMinutes": 5
+      },
+      {
+        "stepNumber": 3,
+        "title": "Sear Shrimp",
+        "instruction": "Heat skillet over high heat. Add shrimp and sear for 2 minutes per side until pink, opaque, and lightly charred.",
+        "durationMinutes": 4,
+        "tip": "Shrimp cook very fast; avoid overcooking to keep them tender."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Char Tortillas & Plate",
+        "instruction": "Warm tortillas directly over gas flame or dry skillet for 30 seconds per side. Fill each with cabbage slaw, seared shrimp, avocado crema, and crumbled cotija.",
+        "durationMinutes": 3
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["Seafood", "High Protein", "Mexican", "Quick"],
+    "createdAt": "2026-09-07T13:00:00.000Z"
+  },
+  {
+    "id": "recipe-8",
+    "title": "Matcha Chia Seed Pudding with Mango",
+    "description": "Silky ceremonial grade green tea chia seed pudding soaked overnight in oat milk, layered with diced sweet honey mango and toasted coconut flakes.",
+    "imageUrl": "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 5,
+    "cookTimeMinutes": 0,
+    "servings": 2,
+    "mealType": "Snack",
+    "difficulty": "Easy",
+    "calories": 230,
+    "macros": {
+      "protein": 8,
+      "carbs": 26,
+      "fat": 10,
+      "fiber": 9
+    },
+    "ingredients": [
+      { "id": "i8-1", "name": "Chia Seeds", "amount": 50, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i8-2", "name": "Oat Milk", "amount": 250, "unit": "ml", "category": "Dairy & Eggs" },
+      { "id": "i8-3", "name": "Ceremonial Matcha Powder", "amount": 1, "unit": "tsp", "category": "Pantry & Grains" },
+      { "id": "i8-4", "name": "Maple Syrup", "amount": 1, "unit": "tbsp", "category": "Pantry & Grains" },
+      { "id": "i8-5", "name": "Fresh Mango", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "diced" },
+      { "id": "i8-6", "name": "Toasted Coconut Flakes", "amount": 10, "unit": "g", "category": "Pantry & Grains" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Whisk Matcha Base",
+        "instruction": "Whisk matcha powder with 2 tbsp warm water until smooth and frothy without clumps. Stir in oat milk and pure maple syrup.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 2,
+        "title": "Combine Chia",
+        "instruction": "Whisk chia seeds into the matcha milk mixture. Stir vigorously for 2 minutes to prevent seeds from clumping at the bottom.",
+        "durationMinutes": 2
+      },
+      {
+        "stepNumber": 3,
+        "title": "Chill to Set",
+        "instruction": "Refrigerate for at least 3 hours or overnight until thickened to pudding consistency.",
+        "durationMinutes": 0,
+        "tip": "Give it one more stir after 15 minutes of chilling for the most uniform texture."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Top & Enjoy",
+        "instruction": "Divide into jars, top with fresh diced sweet mango cubes and toasted coconut flakes.",
+        "durationMinutes": 2
+      }
+    ],
+    "isFavorite": false,
+    "tags": ["Vegan", "Gluten-Free", "No Cook", "Antioxidants", "Snack"],
+    "createdAt": "2026-09-08T15:30:00.000Z"
+  },
+  {
+    "id": "recipe-9",
+    "title": "Dark Chocolate Lava Cake with Sea Salt",
+    "description": "Warm individual molten chocolate soufflé cake made with 72% single-origin dark cocoa, featuring an oozing molten center and flaky Maldon salt.",
+    "imageUrl": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 12,
+    "servings": 2,
+    "mealType": "Dessert",
+    "difficulty": "Medium",
+    "calories": 395,
+    "macros": {
+      "protein": 7,
+      "carbs": 38,
+      "fat": 24,
+      "fiber": 4
+    },
+    "ingredients": [
+      { "id": "i9-1", "name": "70% Dark Chocolate", "amount": 100, "unit": "g", "category": "Pantry & Grains", "notes": "chopped" },
+      { "id": "i9-2", "name": "Unsalted Butter", "amount": 60, "unit": "g", "category": "Dairy & Eggs" },
+      { "id": "i9-3", "name": "Eggs", "amount": 2, "unit": "pieces", "category": "Dairy & Eggs" },
+      { "id": "i9-4", "name": "Cane Sugar", "amount": 40, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i9-5", "name": "All-Purpose Flour", "amount": 25, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i9-6", "name": "Vanilla Extract", "amount": 0.5, "unit": "tsp", "category": "Pantry & Grains" },
+      { "id": "i9-7", "name": "Maldon Sea Salt", "amount": 0.5, "unit": "tsp", "category": "Spices & Oils" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Melt Chocolate & Butter",
+        "instruction": "Preheat oven to 200°C (400°F). Butter two 6oz ramekins and dust with cocoa powder. Gently melt dark chocolate and butter in a heatproof bowl over simmering water.",
+        "durationMinutes": 6
+      },
+      {
+        "stepNumber": 2,
+        "title": "Whisk Eggs & Sugar",
+        "instruction": "In a medium bowl, whisk eggs, sugar, and vanilla until pale and frothy (about 2 minutes).",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 3,
+        "title": "Fold Batter",
+        "instruction": "Fold melted chocolate mixture into the eggs, followed by the sifted flour. Divide batter equally into prepared ramekins.",
+        "durationMinutes": 3
+      },
+      {
+        "stepNumber": 4,
+        "title": "Bake & Invert",
+        "instruction": "Bake for 11-12 minutes until sides are set but center is still soft and jiggly. Run a knife around edge, invert onto plates, and sprinkle with Maldon flaky sea salt.",
+        "durationMinutes": 12,
+        "tip": "Timing is crucial! Even 1 extra minute can bake the molten center solid."
+      }
+    ],
+    "isFavorite": true,
+    "tags": ["Dessert", "Indulgent", "Chocolate"],
+    "createdAt": "2026-09-09T20:00:00.000Z"
+  },
+  {
+    "id": "recipe-10",
+    "title": "Mediterranean Shakshuka with Feta",
+    "description": "North African spiced tomato and red bell pepper sauce simmering with cumin, smoked paprika, gently poached whole eggs, and salty sheep feta.",
+    "imageUrl": "https://images.unsplash.com/photo-1590412200988-a436970781fa?auto=format&fit=crop&w=1000&q=80",
+    "prepTimeMinutes": 12,
+    "cookTimeMinutes": 18,
+    "servings": 2,
+    "mealType": "Breakfast",
+    "difficulty": "Easy",
+    "calories": 360,
+    "macros": {
+      "protein": 21,
+      "carbs": 22,
+      "fat": 20,
+      "fiber": 5
+    },
+    "ingredients": [
+      { "id": "i10-1", "name": "Eggs", "amount": 4, "unit": "pieces", "category": "Dairy & Eggs" },
+      { "id": "i10-2", "name": "Canned Crushed Tomatoes", "amount": 400, "unit": "g", "category": "Pantry & Grains" },
+      { "id": "i10-3", "name": "Red Bell Pepper", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "diced" },
+      { "id": "i10-4", "name": "Yellow Onion", "amount": 1, "unit": "pieces", "category": "Produce", "notes": "diced" },
+      { "id": "i10-5", "name": "Garlic", "amount": 3, "unit": "cloves", "category": "Produce" },
+      { "id": "i10-6", "name": "Feta Cheese", "amount": 60, "unit": "g", "category": "Dairy & Eggs", "notes": "crumbled" },
+      { "id": "i10-7", "name": "Smoked Paprika", "amount": 1, "unit": "tsp", "category": "Spices & Oils" },
+      { "id": "i10-8", "name": "Ground Cumin", "amount": 1, "unit": "tsp", "category": "Spices & Oils" },
+      { "id": "i10-9", "name": "Fresh Cilantro", "amount": 10, "unit": "g", "category": "Produce" }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "title": "Sauté Aromatics",
+        "instruction": "Heat 1 tbsp olive oil in a deep skillet over medium heat. Sauté onion and bell pepper for 6 minutes until tender. Add minced garlic, cumin, and smoked paprika; cook 1 minute.",
+        "durationMinutes": 7
+      },
+      {
+        "stepNumber": 2,
+        "title": "Simmer Rich Sauce",
+        "instruction": "Pour in crushed tomatoes, season with salt and pepper, and simmer gently for 8 minutes until slightly thickened.",
+        "durationMinutes": 8
+      },
+      {
+        "stepNumber": 3,
+        "title": "Poach Eggs in Sauce",
+        "instruction": "Use a spoon to create 4 shallow wells in the bubbling sauce. Crack an egg into each well. Cover pan and cook on low heat for 5-7 minutes until whites are set and yolks remain runny.",
+        "durationMinutes": 6,
+        "tip": "Keep an eye on the eggs in the last 2 minutes so the yolks stay golden and liquid."
+      },
+      {
+        "stepNumber": 4,
+        "title": "Garnish & Serve",
+        "instruction": "Sprinkle with crumbled feta cheese, chopped fresh cilantro, and chili flakes. Serve immediately hot straight from the skillet with warm pita or sourdough.",
+        "durationMinutes": 2
+      }
+    ],
+    "isFavorite": false,
+    "tags": ["Vegetarian", "High Protein", "Brunch", "Mediterranean"],
+    "createdAt": "2026-09-10T09:30:00.000Z"
+  }
+]
