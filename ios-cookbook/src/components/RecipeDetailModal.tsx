@@ -77,14 +77,14 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
   const categories = Array.from(new Set(recipe.ingredients.map((i) => i.category)));
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex flex-col justify-end md:items-center md:justify-center md:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
       {/* Tap backdrop to close */}
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Main Sheet */}
-      <div className="relative w-full max-w-lg mx-auto bg-[#F5F6F8] dark:bg-[#0B1220] rounded-t-[32px] max-h-[92vh] flex flex-col overflow-hidden shadow-2xl transition-all">
+      <div className="relative w-full max-w-lg md:max-w-5xl mx-auto bg-[#F5F6F8] dark:bg-[#0B1220] rounded-t-[32px] md:rounded-[32px] max-h-[92vh] md:max-h-[88vh] flex flex-col overflow-hidden shadow-2xl transition-all">
         {/* Header Bar */}
-        <div className="flex items-center justify-between px-5 pt-4 pb-2 z-10">
+        <div className="flex items-center justify-between px-5 md:px-6 pt-4 pb-2 z-20">
           <button
             id="close-recipe-modal-btn"
             onClick={onClose}
@@ -155,8 +155,10 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
           </div>
         )}
 
-        {/* Scrollable Content */}
-        <div className="overflow-y-auto ios-scroll px-5 pb-28 space-y-5">
+        {/* Content: single column on mobile, 2/3 + 1/3 split on desktop */}
+        <div className="flex-1 overflow-hidden md:flex md:flex-row">
+        {/* Left column (2/3 on desktop): photo, title, macros, method — blue on desktop */}
+        <div className="overflow-y-auto ios-scroll px-5 pb-28 md:pb-8 space-y-5 md:w-2/3 md:bg-[#1E3A8A] md:px-6 md:pt-2">
           {/* Hero Image */}
           <div className="relative rounded-3xl overflow-hidden aspect-16/10 shadow-sm">
             <img
@@ -178,10 +180,10 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
 
           {/* Title & Description */}
           <div>
-            <h1 className="text-2xl font-black text-[#1C1C1E] dark:text-[#F2F2F7] tracking-tight">
+            <h1 className="text-2xl font-black text-[#1C1C1E] dark:text-[#F2F2F7] md:text-white tracking-tight">
               {recipe.title}
             </h1>
-            <p className="text-sm text-[#8E8E93] dark:text-[#98989D] mt-1.5 leading-relaxed">
+            <p className="text-sm text-[#8E8E93] dark:text-[#98989D] md:text-blue-100/80 mt-1.5 leading-relaxed">
               {recipe.description}
             </p>
 
@@ -190,7 +192,7 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
               {recipe.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-[11px] font-medium bg-neutral-200/70 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 px-2.5 py-0.5 rounded-full"
+                  className="text-[11px] font-medium bg-neutral-200/70 dark:bg-neutral-800/80 md:bg-white/15 text-neutral-700 dark:text-neutral-300 md:text-white px-2.5 py-0.5 rounded-full"
                 >
                   #{tag}
                 </span>
@@ -199,33 +201,33 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
           </div>
 
           {/* Servings Scaler (iOS Stepper) */}
-          <div className="bg-white dark:bg-[#1C1C1E] p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] flex items-center justify-between">
+          <div className="bg-white dark:bg-[#1C1C1E] md:bg-white/10 p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] md:border-white/15 flex items-center justify-between">
             <div>
-              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] font-bold">
+              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] md:text-blue-100/70 font-bold">
                 Servings
               </span>
-              <p className="text-sm font-semibold text-[#1C1C1E] dark:text-[#F2F2F7]">
+              <p className="text-sm font-semibold text-[#1C1C1E] dark:text-[#F2F2F7] md:text-white">
                 {servings} {servings === 1 ? 'portion' : 'portions'}
               </p>
             </div>
 
-            <div className="flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-3 bg-neutral-100 dark:bg-neutral-800 md:bg-white/10 px-3 py-1.5 rounded-full">
               <button
                 id="serving-minus-btn"
                 onClick={() => handleServingChange(-1)}
                 disabled={servings <= 1}
-                className="w-7 h-7 rounded-full bg-white dark:bg-neutral-700 shadow-xs flex items-center justify-center text-neutral-700 dark:text-neutral-200 disabled:opacity-40 active:scale-90 transition"
+                className="w-7 h-7 rounded-full bg-white dark:bg-neutral-700 md:bg-white/90 shadow-xs flex items-center justify-center text-neutral-700 dark:text-neutral-200 md:text-[#1E3A8A] disabled:opacity-40 active:scale-90 transition"
               >
                 <Minus className="w-3.5 h-3.5" />
               </button>
-              <span className="w-5 text-center font-bold text-sm text-[#1C1C1E] dark:text-[#F2F2F7]">
+              <span className="w-5 text-center font-bold text-sm text-[#1C1C1E] dark:text-[#F2F2F7] md:text-white">
                 {servings}
               </span>
               <button
                 id="serving-plus-btn"
                 onClick={() => handleServingChange(1)}
                 disabled={servings >= 12}
-                className="w-7 h-7 rounded-full bg-white dark:bg-neutral-700 shadow-xs flex items-center justify-center text-neutral-700 dark:text-neutral-200 disabled:opacity-40 active:scale-90 transition"
+                className="w-7 h-7 rounded-full bg-white dark:bg-neutral-700 md:bg-white/90 shadow-xs flex items-center justify-center text-neutral-700 dark:text-neutral-200 md:text-[#1E3A8A] disabled:opacity-40 active:scale-90 transition"
               >
                 <Plus className="w-3.5 h-3.5" />
               </button>
@@ -233,12 +235,12 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
           </div>
 
           {/* Macros Dashboard */}
-          <div className="bg-white dark:bg-[#1C1C1E] p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08]">
+          <div className="bg-white dark:bg-[#1C1C1E] md:bg-white/10 p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] md:border-white/15">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] font-bold">
+              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] md:text-blue-100/70 font-bold">
                 Nutrition & Macros
               </span>
-              <span className="text-xs text-neutral-400">Total for {servings} {servings === 1 ? 'serving' : 'servings'}</span>
+              <span className="text-xs text-neutral-400 md:text-blue-100/60">Total for {servings} {servings === 1 ? 'serving' : 'servings'}</span>
             </div>
 
             <div className="grid grid-cols-4 gap-2 text-center">
@@ -284,8 +286,51 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
             </div>
           </div>
 
+          {/* Steps Overview */}
+          <div className="bg-white dark:bg-[#1C1C1E] md:bg-white/10 p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] md:border-white/15">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] md:text-blue-100/70 font-bold">
+                Cooking Steps ({recipe.steps.length})
+              </span>
+            </div>
+
+            <div className="space-y-4">
+              {recipe.steps.map((step) => (
+                <div key={step.stepNumber} className="flex gap-3.5">
+                  <div className="w-7 h-7 rounded-full bg-[#1E3A8A]/10 md:bg-white/15 text-[#1E3A8A] dark:text-[#5B8DEF] md:text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    {step.stepNumber}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-bold text-[#1C1C1E] dark:text-[#F2F2F7] md:text-white">
+                        {step.title}
+                      </h4>
+                      {step.durationMinutes && (
+                        <span className="text-xs text-neutral-400 md:text-blue-100/70 flex items-center gap-1 font-medium">
+                          <Clock className="w-3 h-3" />
+                          {step.durationMinutes}m
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-[#8E8E93] dark:text-[#98989D] md:text-blue-100/80 mt-1 leading-relaxed">
+                      {step.instruction}
+                    </p>
+                    {step.tip && (
+                      <div className="mt-2 text-[11px] p-2 bg-amber-50 dark:bg-amber-950/30 md:bg-white/10 text-amber-800 dark:text-amber-300 md:text-amber-200 rounded-xl border border-amber-200/50 md:border-white/15">
+                        💡 <strong className="font-semibold">Chef's Tip:</strong> {step.tip}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right column (1/3 on desktop): Ingredients — white background, own scroll */}
+        <div className="overflow-y-auto ios-scroll px-5 pb-28 md:pb-6 space-y-5 md:w-1/3 md:bg-white md:px-5 md:pt-5 md:border-l md:border-black/[0.06]">
           {/* Ingredients Section */}
-          <div className="bg-white dark:bg-[#1C1C1E] p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08]">
+          <div className="bg-white dark:bg-[#1C1C1E] md:bg-transparent p-4 md:p-0 rounded-2xl border border-black/[0.05] dark:border-white/[0.08] md:border-0">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] font-bold">
                 Ingredients ({recipe.ingredients.length})
@@ -352,50 +397,11 @@ export const RecipeDetailModal: React.FC<RecipeDetailModalProps> = ({
               })}
             </div>
           </div>
-
-          {/* Steps Overview */}
-          <div className="bg-white dark:bg-[#1C1C1E] p-4 rounded-2xl border border-black/[0.05] dark:border-white/[0.08]">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs uppercase tracking-wider text-[#8E8E93] dark:text-[#98989D] font-bold">
-                Cooking Steps ({recipe.steps.length})
-              </span>
-            </div>
-
-            <div className="space-y-4">
-              {recipe.steps.map((step) => (
-                <div key={step.stepNumber} className="flex gap-3.5">
-                  <div className="w-7 h-7 rounded-full bg-[#1E3A8A]/10 text-[#1E3A8A] dark:text-[#5B8DEF] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                    {step.stepNumber}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-bold text-[#1C1C1E] dark:text-[#F2F2F7]">
-                        {step.title}
-                      </h4>
-                      {step.durationMinutes && (
-                        <span className="text-xs text-neutral-400 flex items-center gap-1 font-medium">
-                          <Clock className="w-3 h-3" />
-                          {step.durationMinutes}m
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-[#8E8E93] dark:text-[#98989D] mt-1 leading-relaxed">
-                      {step.instruction}
-                    </p>
-                    {step.tip && (
-                      <div className="mt-2 text-[11px] p-2 bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 rounded-xl border border-amber-200/50">
-                        💡 <strong className="font-semibold">Chef's Tip:</strong> {step.tip}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        </div>
         </div>
 
         {/* Floating Bottom Action: Start Cooking */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-[#1c1c1e] dark:via-[#1c1c1e]/95">
+        <div className="absolute bottom-0 left-0 right-0 md:left-auto md:w-1/3 p-4 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-[#1c1c1e] dark:via-[#1c1c1e]/95 md:dark:from-white md:dark:via-white/95">
           <button
             id="start-cooking-mode-btn"
             onClick={() => {
